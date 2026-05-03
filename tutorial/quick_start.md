@@ -129,6 +129,92 @@ void UrbanEnvironment::serializeState(void* state, std::vector<float>* stateVect
     // ... continue appending other variables ...
 }
 ```
+
+Metis-Core will call to calculateReward, to calculate the reward of the agent in each step.
+
+```cpp
+float UrbanEnviroment::calculateReward(Metis::State& state, int* piDone)
+{
+	float reward = 0.0f;
+	const double maxDistanceToTarget = 700.0;
+	*piDone = 0;
+
+	const double PI = 3.14159265358979323846;
+
+	TURBANSTATE* pOceanState = (TURBANSTATE*)state._pState;
+	
+
+
+	// --- 1. CÁLCULO DEL ERROR DE ALINEACIÓN REAL ---
+	double speedAgent = pOceanState->policeSpeed.magnitude();
+	double outtime;
+	_interceptPoint = calculateInterceptionPoint(*pOceanState, speedAgent, outtime);
+
+	// El rumbo que tiene que tomar el agente es el ángulo hacia ese PUNTO
+	double targetHeading = calculateInterceptionHeading(*pOceanState, speedAgent);    /////////  FUNCIONA
+	//double targetHeading = calculatePureInterceptionHeading(*pOceanState, speedAgent);
+	
+
+	double currentHeading = atan2(pOceanState->policeSpeed.x, pOceanState->policeSpeed.y) * (180.0 / PI);
+	
+	// normalizar el angulo
+	double headingError = fmod(fabs(targetHeading - currentHeading), 360.0);
+	if (headingError > 180.0) headingError = 360.0 - headingError;
+
+
+	float rewardAlignment = 0.0f;
+	if (headingError <= 15.0) {
+		rewardAlignment = (float)(1.0 - (headingError / 15.0));
+	}
+	else {
+		// Penalización suave hasta 180 grados
+		rewardAlignment = (float)(-(headingError - 15.0) / 165.0);
+	}
+
+	// Recompensa por distancia
+	double distanceToTarget = pOceanState->relativeThiefPos.magnitude();
+	// Normalizada de 0.0 a 1.0
+	float rewardDistance = (float)(1.0 - (distanceToTarget / maxDistanceToTarget));
+	
+	// --- 4. CÁLCULO FINAL PESADO ---
+	// Damos peso 70% a estar bien orientado y 30% a la distancia absoluta
+	//reward = (rewardAlignment * 0.7f) + (rewardDistance * 0.3f);
+	reward = rewardAlignment;
+	
+	if (pOceanState->policeSpeed.magnitude() <= 0.0)
+	{
+		reward -= 0.5;
+		reward = fmax(reward, -1.0);
+	}
+	
+	// --- 5. CONDICIONES TERMINALES (Sparsity) ---
+	// Éxito: Interceptación
+	if (distanceToTarget < 10.0) 
+	{
+		*piDone = 1;
+		reward += 10.0f;
+	}
+
+
+	Car* pAgentShip = (Car*)getAgentFromID(0);
+	Car* pEnemyShip = (Car*)getAgentFromID(1);
+
+	Metis::Vector2D posFriend = pAgentShip->getPosition();
+	Metis::Vector2D posEnemy = pEnemyShip->getPosition();
+
+	// Fracaso: El enemigo escapa o nosotros nos salimos
+	Metis::Vector2D pos = pOceanState->relativeThiefPos;
+	if ( (fabs(posFriend.x) > 350 || fabs(posFriend.y) > 250) || (pOceanState->thiefDistanceToTarget < 10) ||
+		 (fabs(posEnemy.x) > 350 || fabs(posEnemy.y) > 250) )
+	{
+		*piDone = -1;
+		reward -= 10.0f;
+	}
+
+	return reward;
+}
+```
+
 This method is where the action chosen by the agent (whether determined procedurally, randomly, or by the neural network) is actually applied to the Environment. This could be anything from steering left or right in a vehicle, to raising or lowering a thermostat in a smart building.
 
 ```cpp

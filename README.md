@@ -93,6 +93,7 @@ class UrbanEnvironment : public Metis::Enviroment
 {
 
 	// override from Metis-Core
+	virtual float calculateReward(Metis::State& state,int *pDone);
 	virtual void getState(Metis::State* pState);
 	virtual void serializeState(void* state, std::vector<float>* stateVector);
 	virtual void applyAction(Metis::IAgent* pAgent,int actionId);

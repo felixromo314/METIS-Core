@@ -69,6 +69,8 @@ Configure the libraries:
 
 Note: Although METIS-Core is built on PyTorch, it handles the integration internally. As a result, you do not need the PyTorch headers (.h) or static libraries (.lib) to run the framework. You only need to ensure that the PyTorch DLLs are located in the same directory as your executable (.exe).
 
+![DLLs pytorch and wxwidgets](img/dllsLibraries.png)
+
 ## 4. Run the Examples/
 
 1.  Open the solution file `PursuitPolice.sln` in Visual Studio 2022.
