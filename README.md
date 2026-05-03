@@ -121,7 +121,7 @@ MyView::MyView(wxFrame* parent)
 void MyView::StartPursuitTraining()
 {
     Metis::AgentTrainerDQN agentTrainer;  // create DQN algorithm trainer
-    _doTraining = true; // Corregido: training
+    _doTraining = true;
     agentTrainer.setCallbackPerStep(onStepTraining);
     agentTrainer.setCallbackEndEpisode(onEndEpisode);
     agentTrainer.training(_pUrbanEnv, _policeCar, _thiefCar);  // do the training
