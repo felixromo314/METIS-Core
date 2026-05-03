@@ -1,4 +1,4 @@
-# METIS-Core: High-Performance C++ Reinforcement Learning Framework
+# METIS-Core: A C++ Reinforcement Learning Framework
 
 ### *Generalized Decision-Making Engine for Autonomous Agents*
 
@@ -19,7 +19,6 @@ Unlike Python-based alternatives, **METIS-Core** is engineered for production-re
 
 *   **Mathematical Abstraction:** Agents operate on pure Tensor-based states, decoupling intelligence from the specific application context.
 *   **Industry Agnostic:** Built to power autonomous logic in Finance (Trading), Robotics, Logistics, and Behavioral AI.
-*   **Scalability:** Designed to handle complex multi-agent coordination with high-fidelity simulation requirements.
 
 ---
 
@@ -30,20 +29,17 @@ Unlike Python-based alternatives, **METIS-Core** is engineered for production-re
 *   **Multi-Agent Coordination:** A unified C++ API designed to synchronize behavior across heterogeneous fleets (e.g., logistics robots, sensor networks, and autonomous transport systems).
 *   **Self-Play Framework:** Enabling AlphaZero-style training loops for agents to discover and evolve optimal strategic behaviors through competitive self-simulation and iterative learning.
 *   **Strategic MARL:** Specialized Multi-Agent Reinforcement Learning algorithms for complex collaborative tasks such as swarm intelligence, distributed resource management, and cooperative navigation.
-*   **Predictive Kinematics:** Native C++ implementations of advanced trajectory prediction and geometry for high-precision tasks, including autonomous docking, object tracking, and dynamic obstacle avoidance.
 
 ---
 
 ## 🛠 Architecture & Integration
 
-METIS-Core is delivered as a **High-Performance SDK**, allowing developers to integrate advanced AI into proprietary simulators without exposing their core logic or sacrificing millisecond-level latency.
+METIS-Core is delivered with a .lib, .dll and .h.
 
 ### Repository Structure
 *   ` /Release ` : .zip of Metis-Core in release with binaries, libraries and includes
-*   ` /Debug ` : .zip of Metis-Core in debug with binaries, libraries and includes
 *   ` /examples ` : Full Source Code for various scenarios (Pursuit, Collaborative Navigation, etc.).
-*   ` /tutorial ` : tutorial step by step to use Metis.
-*   ` /docs ` : Technical manuals and API reference.
+*   ` /tutorial ` : tutorial step by step to use Metis-Core.
 
 ---
 
