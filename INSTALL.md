@@ -47,9 +47,6 @@ Examples/
 │   │   ├── includes/
 │   │   ├── Debug/
 │   │   └── Release/
-│   ├── Torch/
-│   │   ├── libtorchCUDA/
-│   │   └── libtorchDebugCUDA/
 │   └── wxWidgets/
 │       ├── wxMSW-3.2.5_vc14x_x64_Dev/
 │       └── wxWidgets-3.2.5-headers/
