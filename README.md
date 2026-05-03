@@ -54,9 +54,7 @@ METIS-Core is delivered as a **High-Performance SDK**, allowing developers to in
 
 *Figure 1: Agent calculating optimal trajectory to reach a moving target using METIS-Core.*
 
-<video src="videos/PursuitPolice.mp4" controls width="100%" poster="img/PursuitPolice_example.png">
-  Your browser does not support the video tag.
-</video>
+https://github.com/felixromo314/METIS-Core/blob/main/videos/PursuitPolice.mp4
 
 *Figure 1: Agent calculating optimal trajectory to reach a moving target using METIS-Core.*
 
