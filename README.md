@@ -51,8 +51,14 @@ METIS-Core is delivered as a **High-Performance SDK**, allowing developers to in
 
 ### 1. Dynamic Pursuit Logic
 ![PursuitPolice](img/PursuitPolice_example.png)
+
 *Figure 1: Agent calculating optimal trajectory to reach a moving target using METIS-Core.*
 
+<video src="videos/PursuitPolice.mp4" controls width="100%" poster="img/PursuitPolice_example.png">
+  Your browser does not support the video tag.
+</video>
+
+*Figure 1: Agent calculating optimal trajectory to reach a moving target using METIS-Core.*
 
 ### 3. Self-Play (AlphaGo Zero) [Implemented to be added]
 
