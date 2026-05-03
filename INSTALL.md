@@ -52,6 +52,7 @@ Examples/
 │       └── wxWidgets-3.2.5-headers/
 ├── PursuitPolice/ (Example: Police unit tracking a non-compliant vehicle)
 └── (Other examples: MARL, AlphaZero-style games, etc.)
+```
 
 This structure allows all C++ example projects to share a centralized set of libraries (METIS-Core, LibTorch, and wxWidgets), ensuring consistency across the environment and simplifying dependency management.
 
