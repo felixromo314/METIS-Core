@@ -1,0 +1,51 @@
+
+========================================================
+Episode:50
+   meanLoss:1.241 _backbone_norm:99.90   _gradient_norm:1.56
+   countSuccesX50episodes:18   meanReward:0.49
+Grabado Modelo con _countMaxSuccessPer50:18
+
+========================================================
+Episode:100
+   meanLoss:1.286 _backbone_norm:125.77   _gradient_norm:1.26
+   countSuccesX50episodes:32   meanReward:0.02
+Grabado Modelo con _countMaxSuccessPer50:32
+
+========================================================
+Episode:150
+   meanLoss:1.214 _backbone_norm:142.54   _gradient_norm:0.97
+   countSuccesX50episodes:33   meanReward:0.76
+Grabado Modelo con _countMaxSuccessPer50:33
+
+========================================================
+Episode:200
+   meanLoss:0.903 _backbone_norm:156.41   _gradient_norm:1.96
+   countSuccesX50episodes:39   meanReward:0.08
+Grabado Modelo con _countMaxSuccessPer50:39
+
+========================================================
+Episode:250
+   meanLoss:0.733 _backbone_norm:164.95   _gradient_norm:0.12
+   countSuccesX50episodes:42   meanReward:0.13
+Grabado Modelo con _countMaxSuccessPer50:42
+
+========================================================
+Episode:300
+   meanLoss:0.618 _backbone_norm:169.59   _gradient_norm:1.62
+   countSuccesX50episodes:48   meanReward:0.87
+Grabado Modelo con _countMaxSuccessPer50:48
+
+========================================================
+Episode:350
+   meanLoss:0.523 _backbone_norm:175.43   _gradient_norm:0.87
+   countSuccesX50episodes:42   meanReward:-0.01
+
+========================================================
+Episode:400
+   meanLoss:0.551 _backbone_norm:181.14   _gradient_norm:0.82
+   countSuccesX50episodes:44   meanReward:-0.68
+
+========================================================
+Episode:450
+   meanLoss:0.491 _backbone_norm:187.37   _gradient_norm:0.51
+   countSuccesX50episodes:44   meanReward:0.76

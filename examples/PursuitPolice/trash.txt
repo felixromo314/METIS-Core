@@ -1,0 +1,85 @@
+
+typedef struct _OceanState
+{
+	Metis::Vector2D velocityFriend;   // Tu vector velocidad (m/s)
+
+	Metis::Vector2D relativeEnemyPos; // Vector desde ti al enemigo
+	Metis::Vector2D velocityEnemy;    // Vector velocidad del enemigo
+
+	double headingEnemy;              // Ángulo de proa del enemigo
+	double enemyDistanceToTarget;     // Distancia del enemigo a su meta (para prioridad)
+
+	// Variable auxiliar para el cálculo de PN entre frames
+	double lastLOSAngle;              // El ángulo de la línea de visión en el paso anterior
+
+	//std::vector<float> _values; // cada dato del estado será un float
+	_OceanState()
+	{
+		memset(this, 0, sizeof(_OceanState));
+	}
+}TOCEANSTATE;
+
+float OceanEnviroment::calculateReward(Metis::State& state, int* iDone)
+{
+	float reward = 0.0;
+	const double maxDistanceToTarget = 1700;
+	double rewardDistance = 0.0;
+	double rewardAlignment = 0.0;
+
+	*iDone = 0;
+
+	TOCEANSTATE* pOceanState = (TOCEANSTATE*)state._pState;
+
+	double distanceToTarget = pOceanState->relativeEnemyPos.magnitude();
+
+	// calcular si el agente esta alineado y se dirige hacía el objetivo
+	Metis::Vector2D relativPosNorm = pOceanState->relativeEnemyPos.Normalize();
+
+	float targetHeadingPN = calculatePNHeading(pOceanState, INC_TIME);
+
+	// 2. Obtenemos el rumbo actual del barco
+	Metis::Vector2D directionFriend;
+	directionFriend = pOceanState->velocityFriend;
+	directionFriend = directionFriend.Normalize();
+	double currentHeading = atan2(directionFriend.y, directionFriend.x);
+
+	// 3. Calculamos la diferencia (Error de Rumbo)
+	double headingError = targetHeadingPN - currentHeading;
+	// Normalizar el error entre -PI y PI
+	if (headingError > M_PI) headingError -= 2 * M_PI;
+	if (headingError < -M_PI) headingError += 2 * M_PI;
+
+	double absErrorAngle = fabs(headingError);
+
+	double absErrorAngleDeg = wxRadToDeg(absErrorAngle);
+
+	if (absErrorAngleDeg < 45.0)
+	{
+		rewardAlignment = 1.0 - absErrorAngleDeg / 45.0;
+	}
+	else
+	{
+		rewardAlignment = (45.0 - absErrorAngleDeg) / 45.0;
+	}
+
+	rewardDistance = 1.0 - (distanceToTarget / maxDistanceToTarget);
+	
+
+	if (distanceToTarget < 10)
+	{
+		*iDone = 1;
+		rewardDistance += 10.0;
+	}
+
+	if (pOceanState->enemyDistanceToTarget < 10)
+	{
+		*iDone = -1;
+		rewardDistance -= 10.0;
+	}
+
+	reward = (rewardDistance + rewardAlignment) / 2.0;
+
+
+	return reward;
+}
+
