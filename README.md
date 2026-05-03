@@ -1,5 +1,7 @@
 # METIS-Core: A C++ Reinforcement Learning Framework
 
+![METIS-Core](img/Metis-Core500x500.png)
+
 ### *Generalized Decision-Making Engine for Autonomous Agents*
 
 **METIS-Core** is a professional-grade, pure **C++ framework** designed for **Deep Reinforcement Learning (DRL)** and **Multi-Agent Reinforcement Learning (MARL)**. It provides a robust architecture for training autonomous entities in complex, high-stakes environments where performance and low latency are critical.
