@@ -1,69 +1,32 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-*.so.*
-
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Build directories
+# 2. IGNORAR DIRECTORIOS TEMPORALES DE BUILD
+.vs/
+out/
 build/
-Build/
-build-*/
+bin/
+lib/
+Libs/
+x64/
+Debug/
+Release/
 
-# CMake generated files
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-install_manifest.txt
-compile_commands.json
+# 3. IGNORAR ARCHIVOS INTERMEDIOS DE MSVC
+*.obj
+*.pdb
+*.ilk
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cache
+*.tlog
+*.lastbuildstate
+*.idb
+*.ipch
+*.res
+*.pch
+*.suo
 
-# Temporary files
-*.tmp
-*.log
-*.bak
-*.swp
-
-# vcpkg
-vcpkg_installed/
-
-# debug information files
-*.dwo
-
-# test output & cache
-Testing/
-.cache/
+# 4. REGLA ESPECIAL PARA TUS ZIPS DE DISTRIBUCIÓN
+# Bloqueamos todos los zips pero permitimos los de la carpeta Dist
+*.zip
+!/Dist/*.zip

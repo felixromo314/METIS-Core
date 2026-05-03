@@ -39,6 +39,8 @@ This library is **required** to run the graphical examples (such as PursuitPolic
 
 The final structure of the folder should be this:
 
+The final folder organization should look like this to ensure all examples share the centralized library suite:
+```text
 Examples/
 ├── Libs/
 │   ├── METIS-Core/
