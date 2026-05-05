@@ -52,7 +52,7 @@ class UrbanEnviroment : public Metis::Enviroment
 
 public:
 	UrbanEnviroment();
-	~UrbanEnviroment();
+	virtual ~UrbanEnviroment();
 
 	Metis::Vector2D _interceptPoint;
 

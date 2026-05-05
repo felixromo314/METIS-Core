@@ -64,18 +64,18 @@ void UrbanEnviroment::reset()
 
 void UrbanEnviroment::getState(Metis::State *pState)
 {
-	Car* pPoliceCar = (Car * )getAgentFromID(0);
-	Car* pThiefCar = (Car*)getAgentFromID(1);
+	Car* pAgentShip = (Car * )getAgentFromID(0);
+	Car* pEnemyShip = (Car*)getAgentFromID(1);
 
-	Vector2D posFriend = pPoliceCar->getPosition();
-	Vector2D posEnemy = pThiefCar->getPosition();
+	Vector2D posFriend = pAgentShip->getPosition();
+	Vector2D posEnemy = pEnemyShip->getPosition();
 	Vector2D relaPos = posEnemy - posFriend;
 
-	Vector2D speedPolice;
-	pPoliceCar->getSpeed(&speedPolice);
+	Vector2D speedFriend;
+	pAgentShip->getSpeed(&speedFriend);
 
-	Metis::Vector2D thiefSpeed;
-	pThiefCar->getSpeed(&thiefSpeed);
+	Metis::Vector2D enemySpeed;
+	pEnemyShip->getSpeed(&enemySpeed);
 	
 
 
@@ -90,11 +90,11 @@ void UrbanEnviroment::getState(Metis::State *pState)
 	int sizeState = sizeof(TURBANSTATE);
 
 
-	oceantState.policeSpeed = speedPolice;
+	oceantState.policeSpeed = speedFriend;
 
 	oceantState.relativeThiefPos = relaPos;
 	oceantState.thiefDistanceToTarget = distanceEnemytoTarget;
-	oceantState.thiefSpeed = thiefSpeed;
+	oceantState.thiefSpeed = enemySpeed;
 
 	pState->copyState(&oceantState, sizeof(TURBANSTATE));
 	
@@ -117,7 +117,7 @@ void UrbanEnviroment::serizalizeState(void* state, std::vector<float>* stateVect
 	TURBANSTATE* pOceanState = (TURBANSTATE*)pState->_pState;
 
 	
-	Metis::Vector2D policeSpeed;
+	Metis::Vector2D friendSpeed;
 	double vFriendSpeedNormaX = pOceanState->policeSpeed.x / (double)INTERCEPTOR_SHIP_VELOCITY;
 	stateVector->push_back(vFriendSpeedNormaX);
 	double vFriendSpeedNormaY = pOceanState->policeSpeed.y / (double)INTERCEPTOR_SHIP_VELOCITY;
@@ -133,7 +133,7 @@ void UrbanEnviroment::serizalizeState(void* state, std::vector<float>* stateVect
 
 
 
-	Metis::Vector2D thiefSpeed;
+	Metis::Vector2D enemySpeed;
 	double vSpeedNormaX = pOceanState->thiefSpeed.x / (double) INTERCEPTOR_SHIP_VELOCITY;
 	stateVector->push_back(vSpeedNormaX);
 	double vSpeedNormaY = pOceanState->thiefSpeed.y / (double)INTERCEPTOR_SHIP_VELOCITY;

@@ -19,10 +19,11 @@ using namespace std;
 
 class M_InterceptorTrainer;
 
-#define TIME_EACH_TICK 33.0
+#define TIME_EACH_TICK 100.0
 
 wxBEGIN_EVENT_TABLE(MyView, wxPanel)
 EVT_PAINT(MyView::OnPaint)
+EVT_TIMER(wxID_HIGHEST, MyView::OnTimer)   //Receive Timer event declaration
 wxEND_EVENT_TABLE()
 
 MyView* MyView::_pSelf=NULL;
@@ -132,7 +133,7 @@ MyView::MyView(wxFrame* parent)
     : wxPanel(parent) {
     // Initialization code (if needed)
 
-    
+    _modeBotPlay = -1;
     _pUrbanEnv = new UrbanEnviroment();
     
     _policeCar = new Car();
@@ -165,7 +166,11 @@ MyView::MyView(wxFrame* parent)
     _countMaxSuccessPer50 = 0;
     _maxMeanReward = 0.0;
     
-    //_myShip->createBrain(10, 4); //10 entradas y 4 acciones
+    m_pTimer = new wxTimer(this, wxID_ANY);
+    Bind(wxEVT_TIMER, &MyView::OnTimer, this, m_pTimer->GetId());
+    // Start the timer with a 1000 ms (1 second) interval
+    //m_pTimer->Start(TIME_EACH_TICK); // Interval in milliseconds
+
 }
 
 MyView::~MyView()
@@ -256,6 +261,10 @@ void MyView::draw(wxDC& dc, UrbanEnviroment* pEnviroment)
         dc.DrawLine(0, y, sizeWindow.x, y);
     }
 
+    dc.DrawRectangle(655, 0, 5, 500); // dibuar el target de ladron
+
+
+
     std::list<Metis::IAgent *> agents;
     pEnviroment->getAgents(&agents);
     
@@ -332,6 +341,14 @@ void MyView::saveIAModel()
 {
     _policeCar->saveIAModel((char *)"carModel.ia");
 }
+void MyView::loadIAModel()
+{
+    // copy from .\PursuitPolice\IAmodel\
+    // <yourdirectgor>\PursuitPolice\x64\Debug\carModel.ia
+    // <yourdirectgor>\PursuitPolice\x64\Release\carModel.ia
+    _policeCar->loadIAModel((char*)"carModel.ia"); // current path o full path name
+
+}
 
 void MyView::drawHistoricalReward(wxDC& dc, UrbanEnviroment* pEnviroment)
 {
@@ -363,5 +380,110 @@ void MyView::StartTraningInterceptionShip()
     
     agentTrainer.training(_pUrbanEnv, _policeCar, _thiefCar);
     
+
+}
+
+bool MyView::isPlaying()
+{
+    if (_modeBotPlay > 0)
+    {
+        return true;
+    }
+    else return false;
+}
+
+// modeBot: 1 man in the loop
+//          2: bot procedural
+void MyView::Play(int modeBot)
+{
+
+    _modeBotPlay = modeBot;
+
+    _pUrbanEnv->reset();
+
+
+    //srand(123);
+
+    m_pTimer = new wxTimer(this, wxID_ANY);
+    Bind(wxEVT_TIMER, &MyView::OnTimer, this, m_pTimer->GetId());
+    // Start the timer with a 1000 ms (1 second) interval
+    m_pTimer->Start(TIME_EACH_TICK); // Interval in milliseconds
+ 
+}
+int MyView::ReadFromKeyboard()
+{
+    int action;
+
+    action = AHEAD;
+    if (wxGetKeyState(WXK_LEFT))
+    {
+        action = LEFT;
+    }
+    if (wxGetKeyState(WXK_RIGHT))
+    {
+        action  = RIGHT;
+    }
+    if (wxGetKeyState(WXK_DOWN))
+    {
+        action = STOP;
+    }
+    
+
+    return action;
+}
+
+void MyView::OnTimer(wxTimerEvent& event)
+{
+
+    DWORD updateTimerThreadID = GetCurrentThreadId();
+
+    Metis::State urbanState;
+    _pUrbanEnv->getState((Metis::State*) &urbanState);
+    _pUrbanEnv->serizalizeState((Metis::State*)&urbanState, &urbanState._stateVector);
+    
+
+    Car *pPolice = (Car*)_pUrbanEnv->getAgentFromID(0);
+    Car* pThief = (Car*) _pUrbanEnv->getAgentFromID(1);
+
+    //-------- seleccion de la accion de la policia y del agente
+    int actionThief;
+    if (_modeBotPlay == 1)
+        actionThief = ReadFromKeyboard(); // controla el usuario
+    else actionThief = pThief->getActionProcedural((Metis::State&) urbanState); //// accion procedural
+
+    int actionPolice = pPolice->predictAction((Metis::State&)urbanState); // la red predice la mejor accion segun el estado del enviroment
+    //------------------------------
+        
+    // aplicamos la accion al entorno
+    _pUrbanEnv->applyAction(pPolice, actionPolice);
+    _pUrbanEnv->applyAction(pThief, actionThief);
+
+        
+    _pUrbanEnv->updatePhysics(INC_TIME);  // actualizacion de las físicas
+
+    
+    // --- chequear quien ha ganado
+    Metis::Vector2D posPolice = pPolice->getPosition();
+    Metis::Vector2D posThief = pThief->getPosition();
+    Metis::Vector2D r = posPolice.DistanceTo(posThief);
+    if (r.magnitude() < 10)
+    {
+        m_pTimer->Stop();
+        delete m_pTimer;
+        _modeBotPlay = -1;
+        wxMessageBox("Thief caught!!!!!");
+    }
+
+    if (posThief.x > 350)
+    {
+        m_pTimer->Stop();
+        delete m_pTimer;
+        _modeBotPlay = -1;
+        wxMessageBox("The thief reaches the target!!!!");
+    }
+    
+
+    Refresh();  // Mark the window as needing a repaint
+    Update();   // Process the repaint immediately
 
 }

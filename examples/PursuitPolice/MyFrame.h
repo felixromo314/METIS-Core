@@ -30,8 +30,14 @@ public:
     void OnViewTranning(wxCommandEvent& event);
     void OnViewInRealTime(wxCommandEvent& event);
 
+    void OnLoadTraning(wxCommandEvent& event);
+
+    void OnPlay_HITL(wxCommandEvent& event);
+    void OnPlay_RuleBasedBot(wxCommandEvent& event);
+
 private:
 
+    wxMenu* _menuPlayWith;
     MyView* m_MapView;
     
 };
