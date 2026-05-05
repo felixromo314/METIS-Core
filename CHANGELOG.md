@@ -1,3 +1,16 @@
+# 🌌 Metis-Core `v0.1.1-alpha`
+
+* **Features added:**
+* **Agent can now load the AI model via the function:**
+
+```cpp
+Agent::loadIAModel(char *pszIAModel);
+```
+
+* **License message displayed when Meta-Core.dll is loaded into memory by the host application.**
+
+
+
 # 🌌 Metis-Core `v0.1.0-alpha`
 
 **First release** of the high-performance C++ Deep Reinforcement Learning framework.
