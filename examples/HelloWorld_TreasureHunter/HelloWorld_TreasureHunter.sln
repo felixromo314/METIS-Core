@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37203.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloWorld_TreasureHunter", "HelloWorld_TreasureHunter.vcxproj", "{852AB298-70D3-42F0-BE04-D6D76C37286B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+		ReleaseCUDA|x64 = ReleaseCUDA|x64
+		ReleaseCUDA|x86 = ReleaseCUDA|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{852AB298-70D3-42F0-BE04-D6D76C37286B}.Debug|x64.ActiveCfg = Debug|x64
+		{852AB298-70D3-42F0-BE04-D6D76C37286B}.Debug|x64.Build.0 = Debug|x64
+		{852AB298-70D3-42F0-BE04-D6D76C37286B}.Debug|x86.ActiveCfg = Debug|Win32
+		{852AB298-70D3-42F0-BE04-D6D76C37286B}.Debug|x86.Build.0 = Debug|Win32
+		{852AB298-70D3-42F0-BE04-D6D76C37286B}.Release|x64.ActiveCfg = Release|x64
+		{852AB298-70D3-42F0-BE04-D6D76C37286B}.Release|x64.Build.0 = Release|x64
+		{852AB298-70D3-42F0-BE04-D6D76C37286B}.Release|x86.ActiveCfg = Release|Win32
+		{852AB298-70D3-42F0-BE04-D6D76C37286B}.Release|x86.Build.0 = Release|Win32
+		{852AB298-70D3-42F0-BE04-D6D76C37286B}.ReleaseCUDA|x64.ActiveCfg = ReleaseCUDA|x64
+		{852AB298-70D3-42F0-BE04-D6D76C37286B}.ReleaseCUDA|x64.Build.0 = ReleaseCUDA|x64
+		{852AB298-70D3-42F0-BE04-D6D76C37286B}.ReleaseCUDA|x86.ActiveCfg = ReleaseCUDA|Win32
+		{852AB298-70D3-42F0-BE04-D6D76C37286B}.ReleaseCUDA|x86.Build.0 = ReleaseCUDA|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D79370B6-30D8-406F-85D1-FD71A84D3069}
+	EndGlobalSection
+EndGlobal
