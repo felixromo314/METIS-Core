@@ -74,6 +74,8 @@ The best way to understand **METIS-Core** is through our "Hello World" example. 
 
 ### [HelloWorld_TreasureHunter.cpp](./HelloWorld_TreasureHunter.cpp)
 
+![Hello World-TreasureHunter](img/helloWorld_treasureHunter.png)
+
 In this example, you will learn:
 * **Environment Setup**: How to inherit from `Metis::Environment` to create your own world.
 * **State Representation**: Using `TTREASURESTATE` to feed spatial data to the agent.
