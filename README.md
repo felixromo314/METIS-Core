@@ -60,7 +60,7 @@ https://github.com/felixromo314/METIS-Core/blob/main/videos/PursuitPolice.mp4
 
 ---
 
-### 📢 Latest Version: v0.1 (Alpha) - Current Features
+### 📢 Latest Version: v0.1.2 (Alpha) - Current Features
 
 The current build includes the foundational architecture for autonomous decision-making:
 
@@ -68,61 +68,25 @@ The current build includes the foundational architecture for autonomous decision
 
 ---
 
+## ⏱ Get Started: Hello World
+
+The best way to understand **METIS-Core** is through our "Hello World" example. This standalone implementation demonstrates a complete Reinforcement Learning cycle in a minimalist 1D environment.
+
+### [HelloWorld_TreasureHunter.cpp](./HelloWorld_TreasureHunter.cpp)
+
+In this example, you will learn:
+* **Environment Setup**: How to inherit from `Metis::Environment` to create your own world.
+* **State Representation**: Using `TTREASURESTATE` to feed spatial data to the agent.
+* **Reward Engineering**: Implementation of a *Step Penalty* to optimize agent efficiency and prevent "infinite loops" or indecisive behavior.
+* **Agent Training**: Loading and saving the `.ia` model files for persistent learning.
+
+#### 🎮 How to run it:
+1. Open the project in **Visual Studio**.
+2. Build the solution (ensure the METIS DLLs are in your path).
+3. Run the executable and choose:
+   - **Option 1**: To see the agent learn from scratch (watch the `trainingLog.txt`).
+   - **Option 2**: To watch the pre-trained agent reach the treasure instantly from any random position.
+
+> **Note**: This file is self-contained and heavily commented, making it the perfect starting point for developers new to the framework.
+
 ---
-
-## ⏱ Quick Start (3 Minutes)
-
-Integrating METIS into your C++ project is straightforward:
-
-1. **Include headers:**
-```cpp
-#include "MetisCore.h"
-
-// Create your own particular Agent
-class Car :public Metis::Agent
-{
-	// override from Metis-Core
-	virtual int getActionProcedural(Metis::State& state);
-	virtual int update(double delta_time);
-}
-
-// Create your own particular Enviroment
-class UrbanEnvironment : public Metis::Enviroment
-{
-
-	// override from Metis-Core
-	virtual float calculateReward(Metis::State& state,int *pDone);
-	virtual void getState(Metis::State* pState);
-	virtual void serializeState(void* state, std::vector<float>* stateVector);
-	virtual void applyAction(Metis::IAgent* pAgent,int actionId);
-	virtual bool isEpisodeDone();
-}
-
-MyView::MyView(wxFrame* parent)
-    : wxPanel(parent) {
-
-    
-    _pUrbanEnv = new UrbanEnvironment();
-    
-    _policeCar = new Car();
-    _thiefCar = new Car();
-	_policeCar->setID(0);
-	_thiefCar->setID(1);
-	
-	_policeCar->createBrain(NUM_INPUTS, NUM_ACTIONS); // create DQN network
-
-	_pUrbanEnv->addAgent(_policeCar);
-	_pUrbanEnv->addAgent(_thiefCar);
-	
-	
-
-}
-// Start training
-void MyView::StartPursuitTraining()
-{
-    Metis::AgentTrainerDQN agentTrainer;  // create DQN algorithm trainer
-    _doTraining = true;
-    agentTrainer.setCallbackPerStep(onStepTraining);
-    agentTrainer.setCallbackEndEpisode(onEndEpisode);
-    agentTrainer.training(_pUrbanEnv, _policeCar, _thiefCar);  // do the training
-}
