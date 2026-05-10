@@ -191,7 +191,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OutDir);$(ProjectDir)..\Libs\wxWidgets\wxMSW-3.2.5_vc14x_x64_Dev\lib\vc14x_x64_dll;$(ProjectDir)..\Libs\wxWidgets\wxMSW-3.2.5_vc14x_x64_ReleaseDLL\lib\vc14x_x64_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>wxmsw32u_core.lib;wxbase32u.lib;$(ProjectDir)..\Libs\Metis-Core\Release\METIS-Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw32u_core.lib;wxbase32u.lib;$(ProjectDir)..\Libs\Metis-Core\ReleaseCUDA\METIS-Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
