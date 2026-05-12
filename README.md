@@ -28,8 +28,8 @@ Unlike Python-based alternatives, **METIS-Core** is engineered for production-re
 > **Last Update:** May 12, 2026
 
 *   🚀 **v0.1.2-alpha Released**: 
-*		Added "Treasure Hunter": A minimalist "Hello World" in a single .cpp file for quick onboarding.
-*		Added "PursuitPolice": A dynamic environment where a DQN-controlled police agent learns to intercept a fleeing target.
+*		**Added "Treasure Hunter": A minimalist "Hello World" in a single .cpp file for quick onboarding.
+*		**Added "PursuitPolice": A dynamic environment where a DQN-controlled police agent learns to intercept a fleeing target.
 *   🧠 **In Progress: Multi-head Architectures**: Currently implementing a shared-backbone system to support coordination among AI agents to reach a shared goal.
 *   📱 **Future Target: Integrating MCTS (Monte Carlo Tree Search) and dual-head networks to master complex strategic games. 
 
