@@ -24,13 +24,14 @@ Unlike Python-based alternatives, **METIS-Core** is engineered for production-re
 
 ---
 
-## 🚀 Roadmap & Intended Capabilities
+## 🛠️ Current Status & News
+> **Last Update:** May 12, 2026
 
-**METIS-Core** is being developed to bridge the gap between advanced Reinforcement Learning research and production-ready autonomous systems. Our goal is to provide a standardized, high-performance RL interface for:
-
-*   **Multi-Agent Coordination:** A unified C++ API designed to synchronize behavior across heterogeneous fleets (e.g., logistics robots, sensor networks, and autonomous transport systems).
-*   **Self-Play Framework:** Enabling AlphaZero-style training loops for agents to discover and evolve optimal strategic behaviors through competitive self-simulation and iterative learning.
-*   **Strategic MARL:** Specialized Multi-Agent Reinforcement Learning algorithms for complex collaborative tasks such as swarm intelligence, distributed resource management, and cooperative navigation.
+*   🚀 **v0.1.2-alpha Released**: 
+*		Added "Treasure Hunter": A minimalist "Hello World" in a single .cpp file for quick onboarding.
+*		Added "PursuitPolice": A dynamic environment where a DQN-controlled police agent learns to intercept a fleeing target.
+*   🧠 **In Progress: Multi-head Architectures**: Currently implementing a shared-backbone system to support coordination among AI agents to reach a shared goal.
+*   📱 **Future Target: Integrating MCTS (Monte Carlo Tree Search) and dual-head networks to master complex strategic games. 
 
 ---
 
