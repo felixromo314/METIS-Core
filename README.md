@@ -73,7 +73,6 @@ The current build includes the foundational architecture for autonomous decision
 
 The best way to understand **METIS-Core** is through our "Hello World" example. This standalone implementation (all the code in one .cpp) demonstrates a complete Reinforcement Learning cycle in a minimalist 1D environment.
 
-examples/HelloWorld_TreasureHunter/HelloWorld_TreasureHunter.cpp
 ### [HelloWorld_TreasureHunter.cpp](./examples/HelloWorld_TreasureHunter/HelloWorld_TreasureHunter.cpp)
 
 
