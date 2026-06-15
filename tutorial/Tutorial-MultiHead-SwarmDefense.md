@@ -29,7 +29,7 @@ An Imperial Shuttle, carrying a critical shipment of Beskar steel destined for t
 
 The Imperial Shuttle's only hope rests on its two escort TIE Fighters. To succeed, the fighters must maintain tight formation and coordinate their combat maneuvers—independently deciding when to break formation to engage incoming X-Wings and when to return to their escort duties. 
 
-This scenario serves as the perfect testbed for Multi-Head architectures, as the fighters must balance navigation, formation maintenance, and combat logic simultaneously.
+This scenario serves as the perfect testbed for Multi-Head architectures, as the fighters must balance navigation and formation maintenance (modeled as **dense shaping rewards**) alongside time-critical tactical actions such as firing lasers or deploying decoys (modeled as **event-based auxiliary rewards**).
 
 ![METIS-Core](img/ImperialSwarmDefense800px.png)
 
