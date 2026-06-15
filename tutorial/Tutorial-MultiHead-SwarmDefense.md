@@ -25,11 +25,11 @@ Furthermore, what if you want **multiple agents to collaborate** to achieve a sh
 To demonstrate how to build and train a Multi-Head neural network using Metis-Core, I have implemented the "Imperial Swarm Defense" example.
 
 **The Mission Context:**
-An Imperial Shuttle, carrying a critical shipment of Beskar steel destined for the Death Star, is under fire. A squadron of Rebel X-Wings has intercepted the route, determined to prevent the shuttle from reaching its destination. 
+An Imperial Shuttle, carrying a critical shipment of Beskar steel destined for the Death Star, is under fire. A Rebel X-Wings (human in the loop or procedural bot) has intercepted the route, determined to prevent the shuttle from reaching its destination. 
 
-The Imperial Shuttle's only hope rests on its two escort TIE Fighters. To succeed, the fighters must maintain tight formation and coordinate their combat maneuvers—independently deciding when to break formation to engage incoming X-Wings and when to return to their escort duties. 
+In this scenario, the Imperial Shuttle and its two escorting TIE Fighters learn to collaborate using a Multi-Head architecture. The agents must work in unison to reach the Death Star while effectively defending themselves against incoming Rebel X-Wing attacks.
 
-This scenario serves as the perfect testbed for Multi-Head architectures, as the fighters must balance navigation and formation maintenance (modeled as **dense shaping rewards**) alongside time-critical tactical actions such as firing lasers or deploying decoys (modeled as **event-based auxiliary rewards**).
+This scenario serves as the perfect testbed for Multi-Head architectures, as the fighters must balance navigation and formation maintenance (modeled as **dense shaping rewards**) alongside time-critical tactical actions such as firing lasers or deploying decoys (modeled as **event-based rewards**).
 
 ![METIS-Core](img/ImperialSwarmDefense800px.png)
 
