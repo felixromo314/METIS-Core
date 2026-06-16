@@ -36,6 +36,29 @@ This scenario serves as the perfect testbed for Multi-Head architectures, as the
 
 # Main Classes.
 
-[TODO]
+Metis-Core is completely environment-agnostic. You can easily integrate your own simulation by inheriting from our base classes and overriding the required methods to define your environment's state and reward functions.
 
+![main classes](img/ClassMultiHeadNet.png)
 
+### Class `Environment`
+
+The `Environment` class represents the simulated world where the AI agents learn. To integrate your own simulation, you must override the following pure virtual functions:
+
+* `virtual void reset() = 0;`
+  Resets the environment state at the start of each training episode.
+
+* `virtual void getState(State* pState) = 0;`
+  Fills `pState` with current environment data. This data is utilized for Replay Buffer storage.
+
+* `virtual void serializeState(void* state, std::vector<float>* stateVector) = 0;`
+  Serializes environment data into a flat vector. This vector serves as the input for the neural network.
+
+* `virtual void applyAction(IAgent* pAgent, int actionId) = 0;`
+  Executes the selected action for the specified agent.
+
+* `virtual float calculateReward(State& state, int* iDone) = 0;`
+  Calculates the reward for standard DQN models. 
+  *Note: Override this only if using standard DQN; keep it empty for Multi-Head implementations.*
+
+* `virtual std::vector<TMULTIHEAD> calculateRewards(State& state, int* iDone) = 0;`
+  Calculates rewards for Multi-Head architectures. Returns a vector of rewards, providing one value per action branch (head).
