@@ -62,3 +62,6 @@ The `Environment` class represents the simulated world where the AI agents learn
 
 * `virtual std::vector<TMULTIHEAD> calculateRewards(State& state, int* iDone) = 0;`
   Calculates rewards for Multi-Head architectures. Returns a vector of rewards, providing one value per action branch (head).
+  
+  
+  [TODO more clases]
