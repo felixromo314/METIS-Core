@@ -49,6 +49,7 @@ The `Environment` class represents the simulated world where the AI agents learn
 
 * `virtual void getState(State* pState) = 0;`
   Fills `pState` with current environment data. This data is utilized for Replay Buffer storage.
+  The size of the struct State should not be more than 1000 bytes.
 
 * `virtual void serializeState(void* state, std::vector<float>* stateVector) = 0;`
   Serializes environment data into a flat vector. This vector serves as the input for the neural network.
@@ -58,10 +59,85 @@ The `Environment` class represents the simulated world where the AI agents learn
 
 * `virtual float calculateReward(State& state, int* iDone) = 0;`
   Calculates the reward for standard DQN models. 
+  * `int* iDone`: [out] Pointer to set the episode termination status.
+  * ` 1`: Terminal state (Success / Objective reached).
+  * `-1`: Terminal state (Failure / Agent destroyed or penalty condition).
+  * ` 0`: Non-terminal state (Episode is ongoing).
   *Note: Override this only if using standard DQN; keep it empty for Multi-Head implementations.*
 
 * `virtual std::vector<TMULTIHEAD> calculateRewards(State& state, int* iDone) = 0;`
   Calculates rewards for Multi-Head architectures. Returns a vector of rewards, providing one value per action branch (head).
   
+  
+Future work: getState and serializeState seem to do the same work. Thiking of refactoring for being more simple.
+  
+### Class `Agent`
+
+The `Agent` class represents the AI entity being trained by the framework. To customize your agent's behavior, override the following methods:
+
+* `virtual int getActionProcedural(Metis::State& state);`
+  Used for sparring agents (opponents). Implement your heuristic or rule-based logic here to train your AI against a non-learning competitor.
+
+* `virtual void update(double delta_time);`
+  Core loop update. Use this to handle internal logic such as physics simulation, sensor data acquisition, or networking.
+
+* `virtual bool isValidAction(int iAction)`
+  Action filter for Multi-Head architectures. 
+  Since different heads may have specific roles or constraints, use this to restrict which actions are permitted for the current state/agent. Returns `true` by default.
+
+* `virtual bool isValidAction(int iAction) { return true; };`
+
+### Class `MultiHeadAgent`
+
+The `MultiHeadAgent` class represent the a group of ia agents (class `Agent`) that colaborate to get a aim.
+
+Note that `MultiHeadAgent` acts as a container—or "orchestrator"—that manages a collection of these `Agent` objects. Therefore, the specialized behavior for each branch or role must be encapsulated within your custom `Agent` implementation.
+
+### Class `MultiHeadBrainBuilder`
+
+The `MultiHeadBrainBuilder` implements the **Builder Pattern** to provide a fluent interface for configuring and instantiating `MultiHeadAgent` objects.
+
+Example:
+```cpp
+_pMultiAgentHead = multiBuilderHeads.addHead("Shuttle", _Shuttle)
+                                    .addHead("TIE_1", _fighter_TIE_1)
+                                    .addHead("TIE_2", _fighter_TIE_2)
+                                    .setNumberInputsOutputs(CONVOY_INPUTS, ACTIONS::MAX_ACTIONS)
+                                    .useGPU(bUseGPU)
+                                    .build();
+```cpp									
+
+** Multi-Head Neural Architecture
+
+* **Multi-Head Configuration:** This builder instantiates a deep neural network with three distinct heads.
+* **Input/Output Mapping:** The network processes `CONVOY_INPUTS` and outputs `ACTIONS::MAX_ACTIONS` for each head.
+* **Role Filtering:** To enforce specific logic per agent, you must override `Agent::isValidAction(int iAction)`. This allows the framework to dynamically mask or validate actions according to the role and constraints of each specific agent head. Metis-core assign the same number of action to each head.
+
+_Shuttle, _Shuttle and _fighter_TIE_2 are object derivid from the class Agent.
+
+
+### Class `MultiHeadsAgentTrainerDQN`
+
+This class implements the training orchestration for `MultiHeadAgent` objects.
+
+#### Implementation Details
+* **Algorithm:** Multi-Head Deep Q-Network (DQN).
+* **Experience Replay:** Uses a Prioritized Experience Replay (PER) buffer.
+* **Training Specs:** * **Batch Size:** 64 (hardcoded; TODO: migration to configurable property).
+  * **Compute Backend:** Supports CPU/GPU execution, configured via `MultiHeadBrainBuilder::useGPU(bool)`.
+  
+* **GPU Detection:** You can use the following function to query hardware availability at runtime:
+  ```cpp
+  bool bUseGPU = Metis::isCUDAavailable();
+  ```cpp
+---
+***
+___
+
+Now, we are going to explain the classes of the example SwarmDefenseTIE to be more educational how to use in Metis-Core the multi-head nets.
+
+
+
+
   
   [TODO more clases]
