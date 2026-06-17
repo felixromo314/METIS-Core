@@ -305,7 +305,151 @@ float SpaceEnviroment::getDeltaTime()
 }
 ```
 
+### Class `MultiHeadAgent`
 
+MultiHeadAgent represent the multi-head net and as a MultiHeadAgent is a group of ia agent (class Agent), MultiHeadAgent is a container of Agent objects. 
+In thia app is used in this way:
+```cpp
+Metis::MultiHeadAgent* _pMultiAgentHead;  // in the .h of MyView class
+
+MyView::MyView()
+{
+
+	_Shuttle = new Spacecraft();
+	_Shuttle->setID(0);
+	_Shuttle->setColor(255, 255, 255);
+	
+	_fighter_TIE_1 = new Spacecraft();
+	.....
+	_fighter_TIE_2 = new Spacecraft();
+	.......
+
+	Metis::MultiHeadBrainBuilder multiBuilderHeads;  // to make easy to create the multi-head.
+	bool bUseGPU = Metis::isCUDAavailable();
+	_pMultiAgentHead = multiBuilderHeads.addHead(std::string("Shuttle"), _Shuttle)
+                                .addHead(std::string("TIE_1"), _fighter_TIE_1)
+                                .addHead(std::string("TIE_2"), _fighter_TIE_2)
+                                .setNumberInputsOutputs(CONVOY_INPUTS, ACTIONS::MAX_ACTIONS)
+                                .useGPU(bUseGPU).build();
+	_pSpaceEnviroment = new SpaceEnviroment();
+	_pSpaceEnviroment->addAgent(_Shuttle);
+	_pSpaceEnviroment->addAgent(_fighter_TIE_1);
+	_pSpaceEnviroment->addAgent(_fighter_TIE_2);
+	_pSpaceEnviroment->addAgent(_X_Wing);
+ 
+	...
+	...
+}
+//call when the user click on "Start traning" menu
+void MyView::StartTraningMultiheads()
+{
+	Metis::MultiHeadsAgentTrainerDQN multiHeadsTrainer;
+	...
+	...
+	multiHeadsTrainer.training(_pSpaceEnviroment, _pMultiAgentHead, _X_Wing);  // the _pMultiAgentHead is passed to the mult-head trainer. 
+}
+
+```
+
+### Class `Spacecraft`
+
+This class serves as the base entity for all units in the simulation, including the Imperial Shuttle, TIE Fighters, and X-Wings.
+
+> **Design Choice:** While a formal class hierarchy (e.g., `Shuttle`, `TIE`, `XWing` inheriting from `Spacecraft`) was feasible, we opted for a **flat entity approach** using unique IDs to define agent roles. 
+> 
+
+#### Role Identification by ID
+* **Shuttle:** Primary objective / VIP unit.
+* **TIE Fighter:** Escort / Defensive unit.
+* **X-Wing:** Hostile / Aggressor unit.
+
+To integrate custom logic of SwarmDefenseTIE into `Metis-Core`, we must implement the following virtual methods within our derived class. These methods define the agent's behavioral lifecycle and constraints.
+
+```cpp
+virtual int update(double delta_time);
+```
+Update the physics of the spacecraft and the other components that have the spacecraft such as sensor and missil.
+
+```cpp
+int Spacecraft::update(double delta_time)
+{
+	headingRad = wxDegToRad(_headingDeg);
+	vx = _speed * sin(headingRad) * delta_time;
+	vy = _speed * cos(headingRad) * delta_time;
+	if (_pMissile != NULL)
+		_pMissile->Update(delta_time);
+  ...
+  ...
+}
+```
+
+
+```cpp
+virtual int getActionProcedural(Metis::State& state);
+```
+Implements the heuristic or rule-based logic for a sparring (opponent) agent. This method is used during the training phase to provide a non-learning competitor, allowing your `Multi-Head` agent to learn and adapt against a dynamic, procedural environment.
+
+multiHeadsTrainer.training(_pSpaceEnviroment, _pMultiAgentHead, _X_Wing /*the trainer will call the method getActionProcedural on X-Wing*/);
+
+```cpp
+int Spacecraft::getActionProcedural(Metis::State& state)
+{
+int bestAction=0;
+TSPACEENVIROMENT* pEnv = (TSPACEENVIROMENT*)state.getUserState();
+Spacecraft* pShuttle = (Spacecraft*)_pEnv->getAgentFromID(0);
+....
+....
+Spacecraft* pTIEfiring = _pEnv->getTIEfiringLaser();
+if (pTIEfiring != NULL)
+{
+	Vector2D tiePos = pTIEfiring->getPosition();
+	Vector2D r = tiePos - _position;
+	if (r.magnitude() < RANGE_SENSOR)
+	{
+		bestAction = evade();
+	}
+}
+....
+....
+}
+```
+
+
+```cpp
+virtual bool isValidAction(int iAction);
+```
+return true o false if the iAction is valid for the object Spacecraft
+```cpp
+bool Spacecraft::isValidAction(int iAction)
+{
+bool bIsValidAction = true;
+if (this->getID() == 0) // Shuttle
+{
+	//shuttle not fire laser
+	if (FIRE_LASER == iAction)
+	{
+		bIsValidAction = false;
+	}
+}
+...
+...
+return bIsValidAction;
+}
+```
+
+
+```cpp
+virtual void endStep();
+```
+Method call by Metis-Core each time that the training step has finished.
+Invoked by the Metis-Core at the conclusion of each simulation step. Use this hook to perform cleanup operations, update internal variables, or reset temporary state tracking for the next iteration.
+```cpp
+void Spacecraft::endStep()
+{
+	_bTriggerHoloDecoy = false;
+	_Laser_tried_fired = 0;
+}
+```
 
   
   [TODO more clases]
