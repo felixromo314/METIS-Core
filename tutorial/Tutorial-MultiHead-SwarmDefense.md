@@ -127,9 +127,10 @@ This class implements the training orchestration for `MultiHeadAgent` objects.
   * **Compute Backend:** Supports CPU/GPU execution, configured via `MultiHeadBrainBuilder::useGPU(bool)`.
   
 * **GPU Detection:** You can use the following function to query hardware availability at runtime:
-  ```cpp
+```cpp
   bool bUseGPU = Metis::isCUDAavailable();
 ```
+
 ---
 ***
 ___
