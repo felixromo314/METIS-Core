@@ -105,7 +105,7 @@ _pMultiAgentHead = multiBuilderHeads.addHead("Shuttle", _Shuttle)
                                     .setNumberInputsOutputs(CONVOY_INPUTS, ACTIONS::MAX_ACTIONS)
                                     .useGPU(bUseGPU)
                                     .build();
-```cpp									
+```
 
 ** Multi-Head Neural Architecture
 
@@ -129,7 +129,7 @@ This class implements the training orchestration for `MultiHeadAgent` objects.
 * **GPU Detection:** You can use the following function to query hardware availability at runtime:
   ```cpp
   bool bUseGPU = Metis::isCUDAavailable();
-  ```cpp
+```
 ---
 ***
 ___
