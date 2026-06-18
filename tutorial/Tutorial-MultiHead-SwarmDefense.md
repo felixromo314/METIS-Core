@@ -515,39 +515,51 @@ Step 3: Training Process Call Lifecycle
    
    When you call 'multiHeadsTrainer.training(_pSpaceEnviroment, _pMultiAgentHead, _X_Wing);' the lifecycle of calls will be this:
    
-   1: Metis-core resets the environment to its initial state or to a custom configuration defined by the user.
-		void SpaceEnviroment::reset()
-   2: Metis-core will want to get the information of the enviroment.
-		void SpaceEnviroment::getState(Metis::State* pState)
-   3: Metis-core will want the information of the enviroment in a vector<float> and the values normalized.
-		void SpaceEnviroment::serizalizeState(void* state, std::vector<float>* stateVector)
-   4: Metis-Core will want to know the delta-time to use:
-		float SpaceEnviroment::getDeltaTime()
-   5: Metis-core invokes the procedural logic of the X-Wing sparring agent.
-		int Spacecraft::getActionProcedural(Metis::State& state)
-   6: Metis-core applies the selected action for each agent.
-		void SpaceEnviroment::applyAction(Metis::IAgent* pAgent, int actionId)
-   7: Metis-core performs the necessary state updates (physics, sensors, etc.) for each agent by invoking this function.
-		int Spacecraft::update(double delta_time)   
-   8: Once the trainer object has applied the actions, metis-core want to know the new state of the enviroment, calling this function.
-		void SpaceEnviroment::getState(Metis::State* pState)
-		void SpaceEnviroment::serizalizeState(void* state, std::vector<float>* stateVector)
-   9: After updating the environment state, Metis-Core computes the reward for the selected action to measure its effectiveness by calling this function:
-		vector<Metis::TMULTIHEAD> SpaceEnviroment::calculateRewards(Metis::State& state, int* pDone)
-			return value: 
-			int*pDone = 0; no terminal estate.
-			int*pDone = 1; terminal estate. The multi-head win.
-			int*pDone = -1; terminal estate. The multi-head lose.
-   10: Metis-core call the callback and the end of the step:
-		void onStepTraining(void* pSender, Metis::TMULTIHEADAGENTMETRICS* pMetrics);
-		Training can be manually stopped by setting pMetrics->bForceStopTraining to true.
-		
-   11: If agents require a reset or the initialization of specific variables, Metis-Core calls:
-		void Spacecraft::endStep()
-   12: Metis-Core call the callback for each 50 episodes:
-		void onEndEpisode(void* pSender, Metis::TMULTIHEADAGENTMETRICS* pMetrics);
-		Metis::TMULTIHEADAGENTMETRICS holds the data (_meanTotalLoss, _headMetric)  used to assess the model and decide if it should be saved.
-		Here we will use the method: _pMultiAgentHead->saveIAModel((char *) "imperialConvoy.ai");
+	1: Metis-core resets the environment to its initial state or to a custom configuration defined by the user.
+	`void SpaceEnviroment::reset()`
+
+	2: Metis-core will want to get the information of the enviroment.
+	`void SpaceEnviroment::getState(Metis::State* pState)`
+
+	3: Metis-core will want the information of the enviroment in a vector and the values normalized.
+	`void SpaceEnviroment::serizalizeState(void* state, std::vector* stateVector)`
+
+	4: Metis-Core will want to know the delta-time to use:
+	`float SpaceEnviroment::getDeltaTime()`
+
+	5: Metis-core invokes the procedural logic of the X-Wing sparring agent.
+	`int Spacecraft::getActionProcedural(Metis::State& state)`
+
+	6: Metis-core applies the selected action for each agent.
+	`void SpaceEnviroment::applyAction(Metis::IAgent* pAgent, int actionId)`
+
+	7: Metis-core performs the necessary state updates (physics, sensors, etc.) for each agent by invoking this function.
+	`int Spacecraft::update(double delta_time)`
+
+	8: Once the trainer object has applied the actions, metis-core want to know the new state of the enviroment, calling this function.
+	`void SpaceEnviroment::getState(Metis::State* pState)`
+	`void SpaceEnviroment::serizalizeState(void* state, std::vector* stateVector)`
+
+	9: After updating the environment state, Metis-Core computes the reward for the selected action to measure its effectiveness by calling this function:
+	`vectorMetis::TMULTIHEAD SpaceEnviroment::calculateRewards(Metis::State& state, int* pDone)`
+	return value:
+
+	* `intpDone = 0;` no terminal estate.
+	* `intpDone = 1;` terminal estate. The multi-head win.
+	* `intpDone = -1;` terminal estate. The multi-head lose.
+
+	10: Metis-core call the callback and the end of the step:
+	`void onStepTraining(void pSender, Metis::TMULTIHEADAGENTMETRICS* pMetrics);`
+	Training can be manually stopped by setting `pMetrics->bForceStopTraining = true`.
+
+	11: If agents require a reset or the initialization of specific variables, Metis-Core calls:
+	`void Spacecraft::endStep()`
+
+	12: Metis-Core call the callback for each 50 episodes:
+	`void onEndEpisode(void* pSender, Metis::TMULTIHEADAGENTMETRICS* pMetrics);`
+	Metis::TMULTIHEADAGENTMETRICS holds the data (_meanTotalLoss, _headMetric) used to assess the model and decide if it should be saved. Here we will use the method:
+	`_pMultiAgentHead->saveIAModel((char *) "imperialConvoy.ai");`
+
 
 
 ## Steps for Using the Trained Model
