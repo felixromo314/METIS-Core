@@ -578,7 +578,7 @@ The model is already training and now it is time to use the IA model.
 	```cpp
 	m_pPlayTimer = new wxTimer(this, wxID_ANY);
 	Bind(wxEVT_TIMER, &MyView::OnTimer, this, m_pPlayTimer->GetId());
-// Start the timer with a 1000 ms (1 second) interval
+    //Start the timer with a 1000 ms (1 second) interval
 	m_pPlayTimer->Start(TIME_EACH_TICK); // Interval in milliseconds
 	```
 	- So in the ::OnTimer(...) will be loop of the play and where we call to Metis-Core to predict the best action regarding the current state of the enviroment.
