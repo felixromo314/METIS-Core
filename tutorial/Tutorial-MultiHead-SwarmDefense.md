@@ -1,4 +1,4 @@
-# Tutorial: How to Use Multi-Head Networks with Metis-Core
+# Tutorial: How to Use Multi-Head Networks with Metis-Core  (METIS-Core v0.2.0  alpha, to be release soon)
 
 ## Introduction: What is a Multi-Head Architecture in Reinforcement Learning?
 
@@ -144,11 +144,13 @@ Now, we are going to explain the classes of the example SwarmDefenseTIE to be mo
 
 ### Class `SpaceEnviroment`
 
-The `SpaceEnvironment` class implements the simulation logic for the *SwarmDefenseTIE* scenario, acting as the interface between the game physics and the `Metis-Core` framework.
-
 ```cpp
 class SpaceEnviroment : public Metis::Enviroment
 ```
+
+The `SpaceEnvironment` class implements the simulation logic for the *SwarmDefenseTIE* scenario, acting as the interface between the game physics and the `Metis-Core` framework.
+
+
 To adapt the framework to the specific requirements of the *SwarmDefense* mission, the following methods from the base `Environment` class have been overridden:
 
 ```cpp
@@ -353,6 +355,10 @@ void MyView::StartTraningMultiheads()
 
 ### Class `Spacecraft`
 
+```cpp
+class Spacecraft : public Metis::Agent
+```
+
 This class serves as the base entity for all units in the simulation, including the Imperial Shuttle, TIE Fighters, and X-Wings.
 
 > **Design Choice:** While a formal class hierarchy (e.g., `Shuttle`, `TIE`, `XWing` inheriting from `Spacecraft`) was feasible, we opted for a **flat entity approach** using unique IDs to define agent roles. 
@@ -451,5 +457,146 @@ void Spacecraft::endStep()
 }
 ```
 
-  
-  [TODO more clases]
+## Steps for tranning
+
+The code por training the Shuttle, and the TIES is:
+
+Step 1: Setup the enviroment.
+
+```cpp
+MyView::MyView(wxFrame* parent)
+{
+	// Create the objets Spacecraft (derived from Metis::Agent)
+	// the id is important becasuse determine the rol of each agent and is used as input. 
+	_Shuttle = new Spacecraft();
+	_Shuttle->setID(0);
+	_fighter_TIE_1 = new Spacecraft();
+	_fighter_TIE_1->setID(1);
+	_fighter_TIE_2 = new Spacecraft();
+	_fighter_TIE_2->setID(2);
+	
+	// Create the multi-head deep net.
+	Metis::MultiHeadBrainBuilder multiBuilderHeads;
+
+	bool bUseGPU = Metis::isCUDAavailable(); // use CPU or GPU for training.
+
+	_pMultiAgentHead = multiBuilderHeads.addHead(std::string("Shuttle"), _Shuttle)
+                                .addHead(std::string("TIE_1"), _fighter_TIE_1)
+                                .addHead(std::string("TIE_2"), _fighter_TIE_2)
+                                .setNumberInputsOutputs(CONVOY_INPUTS, ACTIONS::MAX_ACTIONS)
+                                .useGPU(bUseGPU).build();
+								
+    //Create the enviroment of the space 								
+	_pSpaceEnviroment = new SpaceEnviroment(); // derived from Metis::Enviroment
+	// add the agents to the enviroment.
+	_pSpaceEnviroment->addAgent(_Shuttle);
+	_pSpaceEnviroment->addAgent(_fighter_TIE_1);
+	_pSpaceEnviroment->addAgent(_fighter_TIE_2);
+	_pSpaceEnviroment->addAgent(_X_Wing);
+	
+}
+```
+
+Step 2: Call the trainer.
+```cpp
+void MyView::StartTraningMultiheads()
+{
+	Metis::MultiHeadsAgentTrainerDQN multiHeadsTrainer;  // create the trainer of the multi-head
+	
+	// setup the callback
+	multiHeadsTrainer.setCallbackPerStep(onStepTraining); // call for each step of training
+	multiHeadsTrainer.setCallbackEndEpisode(onEndEpisode); // call at the end of the episode
+	multiHeadsTrainer.training(_pSpaceEnviroment, _pMultiAgentHead, _X_Wing);
+	
+}
+```
+
+Step 3: Training Process Call Lifecycle
+   
+   When you call 'multiHeadsTrainer.training(_pSpaceEnviroment, _pMultiAgentHead, _X_Wing);' the lifecycle of calls will be this:
+   
+   1: Metis-core resets the environment to its initial state or to a custom configuration defined by the user.
+		void SpaceEnviroment::reset()
+   2: Metis-core will want to get the information of the enviroment.
+		void SpaceEnviroment::getState(Metis::State* pState)
+   3: Metis-core will want the information of the enviroment in a vector<float> and the values normalized.
+		void SpaceEnviroment::serizalizeState(void* state, std::vector<float>* stateVector)
+   4: Metis-Core will want to know the delta-time to use:
+		float SpaceEnviroment::getDeltaTime()
+   5: Metis-core invokes the procedural logic of the X-Wing sparring agent.
+		int Spacecraft::getActionProcedural(Metis::State& state)
+   6: Metis-core applies the selected action for each agent.
+		void SpaceEnviroment::applyAction(Metis::IAgent* pAgent, int actionId)
+   7: Metis-core performs the necessary state updates (physics, sensors, etc.) for each agent by invoking this function.
+		int Spacecraft::update(double delta_time)   
+   8: Once the trainer object has applied the actions, metis-core want to know the new state of the enviroment, calling this function.
+		void SpaceEnviroment::getState(Metis::State* pState)
+		void SpaceEnviroment::serizalizeState(void* state, std::vector<float>* stateVector)
+   9: After updating the environment state, Metis-Core computes the reward for the selected action to measure its effectiveness by calling this function:
+		vector<Metis::TMULTIHEAD> SpaceEnviroment::calculateRewards(Metis::State& state, int* pDone)
+			return value: 
+			int*pDone = 0; no terminal estate.
+			int*pDone = 1; terminal estate. The multi-head win.
+			int*pDone = -1; terminal estate. The multi-head lose.
+   10: Metis-core call the callback and the end of the step:
+		void onStepTraining(void* pSender, Metis::TMULTIHEADAGENTMETRICS* pMetrics);
+		Training can be manually stopped by setting pMetrics->bForceStopTraining to true.
+		
+   11: If agents require a reset or the initialization of specific variables, Metis-Core calls:
+		void Spacecraft::endStep()
+   12: Metis-Core call the callback for each 50 episodes:
+		void onEndEpisode(void* pSender, Metis::TMULTIHEADAGENTMETRICS* pMetrics);
+		Metis::TMULTIHEADAGENTMETRICS holds the data (_meanTotalLoss, _headMetric)  used to assess the model and decide if it should be saved.
+		Here we will use the method: _pMultiAgentHead->saveIAModel((char *) "imperialConvoy.ai");
+
+
+## Steps for Using the Trained Model
+		
+The model is already training and now it is time to use the IA model.
+	
+	- Load the IA model saved on disk. click on the menu 'Load Traning'
+	```cpp
+	void MyView::LoadTraning()
+	{
+		_pMultiAgentHead->loadIAModel((char*)"imperialConvoy.ai"); // current path o full path name
+	}
+	```
+	- Using the app SwarmDefenseTIE, the user will click on the menu "Human in the Loop", so void MyView::Play(int modeBot) will execute.
+	- On MyView::Play(...) we set up the playing timer.
+	```cpp
+	m_pPlayTimer = new wxTimer(this, wxID_ANY);
+	Bind(wxEVT_TIMER, &MyView::OnTimer, this, m_pPlayTimer->GetId());
+// Start the timer with a 1000 ms (1 second) interval
+	m_pPlayTimer->Start(TIME_EACH_TICK); // Interval in milliseconds
+	```
+	- So in the ::OnTimer(...) will be loop of the play and where we call to Metis-Core to predict the best action regarding the current state of the enviroment.
+	```cpp
+	void MyView::OnTimer(wxTimerEvent& event)
+	{
+			// get the state of the Enviroment
+		Metis::State spaceState;  
+		_pSpaceEnviroment->getState((Metis::State*)&spaceState);
+		_pSpaceEnviroment->serizalizeState((Metis::State*)&spaceState, &spaceState._stateVector);
+		...
+		...
+		// predict the best action for each agent of the multi-head
+		int shuttle_Action = _pMultiAgentHead->getBestAction(pShuttle, spaceState);
+		int TIE_1_Action = _pMultiAgentHead->getBestAction(pTIE_1, spaceState);
+		int TIE_2_Action = _pMultiAgentHead->getBestAction(pTIE_2, spaceState);
+		...
+		...
+		// apply the action over the Enviroment
+		_pSpaceEnviroment->applyAction(pShuttle, shuttle_Action);
+		_pSpaceEnviroment->applyAction(pTIE_1, TIE_1_Action);
+		_pSpaceEnviroment->applyAction(pTIE_2, TIE_2_Action);
+		_pSpaceEnviroment->applyAction(pX_Wing, actionXWing);
+
+		//update the enviroment
+		double deltatime = _pSpaceEnviroment->getDeltaTime();
+		_pSpaceEnviroment->updatePhysics(deltatime);  // actualizacion de las físicas
+		
+		// logic to know if the the Shuttle reach the target or not. (logic if we reach a terminal state)
+		...
+		...
+	}
+	```
