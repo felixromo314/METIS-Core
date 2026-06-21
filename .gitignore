@@ -8,6 +8,7 @@ Libs/
 x64/
 Debug/
 Release/
+ReleaseCUDA/
 
 # 3. IGNORAR ARCHIVOS INTERMEDIOS DE MSVC
 *.obj

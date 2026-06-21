@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37328.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SwarmDefenseTIE", "SwarmDefenseTIE.vcxproj", "{A9604CC2-6884-4804-9DD4-550BC776E30E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		ReleaseCUDA|x64 = ReleaseCUDA|x64
+		ReleaseCUDA|x86 = ReleaseCUDA|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9604CC2-6884-4804-9DD4-550BC776E30E}.Debug|x64.ActiveCfg = Debug|x64
+		{A9604CC2-6884-4804-9DD4-550BC776E30E}.Debug|x64.Build.0 = Debug|x64
+		{A9604CC2-6884-4804-9DD4-550BC776E30E}.Debug|x86.ActiveCfg = Debug|Win32
+		{A9604CC2-6884-4804-9DD4-550BC776E30E}.Debug|x86.Build.0 = Debug|Win32
+		{A9604CC2-6884-4804-9DD4-550BC776E30E}.ReleaseCUDA|x64.ActiveCfg = ReleaseCUDA|x64
+		{A9604CC2-6884-4804-9DD4-550BC776E30E}.ReleaseCUDA|x64.Build.0 = ReleaseCUDA|x64
+		{A9604CC2-6884-4804-9DD4-550BC776E30E}.ReleaseCUDA|x86.ActiveCfg = ReleaseCUDA|Win32
+		{A9604CC2-6884-4804-9DD4-550BC776E30E}.ReleaseCUDA|x86.Build.0 = ReleaseCUDA|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11CFCA67-9E0C-4AEB-9553-E4FB0318F9C2}
+	EndGlobalSection
+EndGlobal

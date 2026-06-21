@@ -1,0 +1,6 @@
+
+========================================================
+Episode:50   countSuccesX50episodes:15
+   headName:Head_0  _meanReward:0.03   _meanGradient:0.22
+   headName:Head_1  _meanReward:0.03   _meanGradient:0.22
+   headName:Head_2  _meanReward:0.03   _meanGradient:0.20
