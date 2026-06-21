@@ -30,6 +30,7 @@ Unlike Python-based alternatives, **METIS-Core** is engineered for production-re
 *   🚀 **v0.2.0-alpha Released**: 
 	*   **Added Multi-head Architectures**: shared-backbone system to support coordination among AI agents to reach a shared goal
 	*	**Added "SwarmDefenseTIE" example**: A collaborative MARL scenario where an Imperial Shuttle and two TIE fighters must transport beskar to the Death Star. All agents are trained with a Shared-Trunk Multi-Head architecture to develop defensive coordination against an attacking X-Wing.
+	![Multi-heads](img/multihead.png)
 			
 *   🚀 **v0.1.2-alpha Released**: 
     *   **Added "Treasure Hunter"**: A minimalist "Hello World" in a single `.cpp` file for quick onboarding.
