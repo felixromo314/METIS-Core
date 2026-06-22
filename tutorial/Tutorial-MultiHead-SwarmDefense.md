@@ -1,4 +1,4 @@
-# Tutorial: How to Use Multi-Head Networks with Metis-Core  (METIS-Core v0.2.0  alpha, to be release soon)
+# Tutorial: How to Use Multi-Head Networks with Metis-Core  (METIS-Core v0.2.0  alpha)
 
 ## Introduction: What is a Multi-Head Architecture in Reinforcement Learning?
 
