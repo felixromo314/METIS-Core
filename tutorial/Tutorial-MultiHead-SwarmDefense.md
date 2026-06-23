@@ -41,8 +41,6 @@ Check out the swarm coordination in action! 🚀
 
 - **Video Link:** [https://youtu.be/Fswef8e0Okc](https://youtu.be/Fswef8e0Okc)
 
-[![Imperial Swarm Defense Video](img/ImperialSwarmDefense800px.png)](videos/SwarmdefenseMultiheads.mp4)
-
 
 
 # Main Classes in Metis-Core
