@@ -31,8 +31,15 @@ In this scenario, the Imperial Shuttle and its two escorting TIE Fighters learn 
 
 This scenario serves as the perfect testbed for Multi-Head architectures, as the fighters must balance navigation and formation maintenance (modeled as **dense shaping rewards**) alongside time-critical tactical actions such as firing lasers or deploying decoys (modeled as **event-based rewards**).
 
-Note: better with audio, include the soundtrack of Metis-Core :-)
-Link to a video: [videos/SwarmdefenseMultiheads.mp4](videos/SwarmdefenseMultiheads.mp4)
+### Demo: SwarmDefenseTIE
+
+Check out the swarm coordination in action! 🚀
+
+[![Watch the demo on YouTube](https://img.youtube.com/vi/Fswef8e0Okc/0.jpg)](https://www.youtube.com/watch?v=Fswef8e0Okc)
+
+> **Note:** Best experienced with audio! The video features a custom soundtrack composed for the Metis-Core project.
+
+- **Video Link:** [https://youtu.be/Fswef8e0Okc](https://youtu.be/Fswef8e0Okc)
 
 [![Imperial Swarm Defense Video](img/ImperialSwarmDefense800px.png)](videos/SwarmdefenseMultiheads.mp4)
 
