@@ -152,7 +152,7 @@ double Car::CalculateCrossTrackError(double baseHeadingDeg, Metis::Vector2D rela
 int Car::getActionProcedural(Metis::State& state)
 {
 	int iAction = AHEAD;
-	TURBANSTATE* pOceanState = (TURBANSTATE*)state._pState;
+	TURBANSTATE* pOceanState = (TURBANSTATE*)state.getUserState();
 	double distanceAgent = pOceanState->relativeThiefPos.magnitude();
 
 	// Configuración (Podrían ser constantes o variables de clase)

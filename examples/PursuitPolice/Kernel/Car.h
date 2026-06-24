@@ -60,6 +60,7 @@ public:
 	// override from Metis-Core
 	virtual int getActionProcedural(Metis::State& state);
 	virtual int update(double delta_time);
+	virtual bool isValidAction(int iAction) { return true; };
 
 };
 

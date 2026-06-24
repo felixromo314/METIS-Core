@@ -23,7 +23,7 @@ public:
     void DisplayInRealTime(bool bDispalyInRealTime);
 
     void drawHistoricalReward(wxDC& dc, UrbanEnviroment *pEnviroment);
-    void DrawRewardMetricsForShip(wxDC& dc, Car* pShip, int xPos, int startY);
+    void DrawRewardMetricsForShip(wxDC& dc, Car* pShip, int xPos, int startY, std::vector<double>* pHistoryReward);
     int ReadFromKeyboard();
 
     void StartTraningInterceptionShip();

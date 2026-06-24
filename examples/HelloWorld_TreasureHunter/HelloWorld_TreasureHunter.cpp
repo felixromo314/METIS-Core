@@ -71,6 +71,7 @@ public:
 	// methods to be override from Metis-core
 	virtual int getActionProcedural(Metis::State& state);
 	virtual int update(double delta_time);
+	virtual bool isValidAction(int iAction) { return true; };
 };
 
 // Useful for providing a 'Sparring Partner' or a baseline to train against.
@@ -135,6 +136,7 @@ public:
 	virtual void serizalizeState(void* state, std::vector<float>* stateVector);
 	virtual void applyAction(Metis::IAgent* pAgent, int actionId);
 	virtual float calculateReward(Metis::State& state, int* pDone);
+	virtual std::vector<Metis::TMULTIHEAD> calculateRewards(Metis::State& state, int* pDone);
 	virtual void reset();
 };
 // in each step, this funcion copy the data of the enviroment, to the struct TTREASURESTATE which will be use to calculate the reward of the ia hunter treasure
@@ -191,6 +193,13 @@ void TreasureEnviroment::applyAction(Metis::IAgent* pAgent, int actionId)
 		}
 	}
 }
+//used in multi-head net
+std::vector<Metis::TMULTIHEAD> TreasureEnviroment::calculateRewards(Metis::State& state, int* pDone)
+{
+	std::vector<Metis::TMULTIHEAD> r_heads;
+
+	return r_heads; // return empty
+}
 // calculate the reward based on the current values of the TTREASURESTATE.
 // Note: with pDone you can say to the Metis-Core when the episode has reached the END.
 //   *pDone = 1; To set that the episode has finished with a WIN
@@ -200,7 +209,7 @@ float TreasureEnviroment::calculateReward(Metis::State& state, int* pDone)
 	float rewardDistance = 0.0;
 	*pDone = 0; // mark end or not end of the training episode ( 0: not end episode)
 
-	TTREASURESTATE* pTreasureState = (TTREASURESTATE*)state._pState;
+	TTREASURESTATE* pTreasureState = (TTREASURESTATE*)state.getUserState();
 
 	//the treasure is to the right
 	if (pTreasureState->distanteToTreasure > 0)
@@ -414,7 +423,7 @@ int main()
 
 		aPirateTrainer.setCallbackPerStep(onStepTraining);
 		aPirateTrainer.setCallbackEndEpisode(onEndEpisode);
-		aPirateTrainer.training(&aTreasureEnviroment, &iaTreasureHunter);
+		aPirateTrainer.training(&aTreasureEnviroment, &iaTreasureHunter,NULL /*there is no enemy agent*/);
 	}
 	if (option == 2)
 	{

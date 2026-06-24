@@ -60,6 +60,7 @@ public:
 	virtual void reset();
 	//virtual void getState(TURBANSTATE* state);
 	virtual float calculateReward(Metis::State& state,int *pDone);
+	virtual std::vector<Metis::TMULTIHEAD> calculateRewards(Metis::State& state, int* pDone);
 
 	virtual void setNumActions(int numActions) {};
 	virtual void getState(Metis::State* pState);

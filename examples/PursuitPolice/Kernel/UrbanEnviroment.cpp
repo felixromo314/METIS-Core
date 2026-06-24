@@ -114,7 +114,7 @@ double normalizeAngleDeg2(double angulo)
 void UrbanEnviroment::serizalizeState(void* state, std::vector<float>* stateVector)
 {
 	Metis::State* pState = (Metis::State *)state;
-	TURBANSTATE* pOceanState = (TURBANSTATE*)pState->_pState;
+	TURBANSTATE* pOceanState = (TURBANSTATE*)pState->getUserState();
 
 	
 	Metis::Vector2D friendSpeed;
@@ -320,6 +320,12 @@ double calculateInterceptionHeading(TURBANSTATE& state, double agentSpeedFriend)
 
 	return targetHeadingDeg;
 }
+std::vector<Metis::TMULTIHEAD> UrbanEnviroment::calculateRewards(Metis::State& state, int* pDone)
+{
+	std::vector<Metis::TMULTIHEAD> r;
+
+	return r;
+}
 float UrbanEnviroment::calculateReward(Metis::State& state, int* piDone)
 {
 	float reward = 0.0f;
@@ -328,7 +334,7 @@ float UrbanEnviroment::calculateReward(Metis::State& state, int* piDone)
 
 	const double PI = 3.14159265358979323846;
 
-	TURBANSTATE* pOceanState = (TURBANSTATE*)state._pState;
+	TURBANSTATE* pOceanState = (TURBANSTATE*)state.getUserState();
 	
 
 

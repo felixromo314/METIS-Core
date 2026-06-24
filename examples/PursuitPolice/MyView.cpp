@@ -283,7 +283,8 @@ void MyView::draw(wxDC& dc, UrbanEnviroment* pEnviroment)
 
 }
 
-void MyView::DrawRewardMetricsForShip(wxDC& dc, Car* pShip, int xPos, int startY)
+//void MyView::DrawRewardMetricsForShip(wxDC& dc, Car* pShip, int xPos, int startY)
+void MyView::DrawRewardMetricsForShip(wxDC& dc, Car* pShip, int xPos, int startY, std::vector<double>* pHistoryReward)
 {
     // 1. Configuración de la "Caja" de la gráfica
     int graphWidth = 650;
@@ -354,7 +355,7 @@ void MyView::drawHistoricalReward(wxDC& dc, UrbanEnviroment* pEnviroment)
 {
 
 
-    DrawRewardMetricsForShip(dc, NULL, 10, 350);
+    DrawRewardMetricsForShip(dc, NULL, 10, 350, &_rewardHistory);
 
 }
 void MyView::DisplayTranning(bool bDisplayTranning)
@@ -459,7 +460,7 @@ void MyView::OnTimer(wxTimerEvent& event)
     _pUrbanEnv->applyAction(pThief, actionThief);
 
         
-    _pUrbanEnv->updatePhysics(INC_TIME);  // actualizacion de las físicas
+    _pUrbanEnv->updatePhysics(METIS_INC_TIME);  // actualizacion de las físicas
 
     
     // --- chequear quien ha ganado

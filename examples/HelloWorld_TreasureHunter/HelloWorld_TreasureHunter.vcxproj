@@ -153,9 +153,10 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(SolutionDir)..\Libs\Metis-Core\$(Configuration)\METIS-Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(SolutionDir)..\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PreBuildEvent>
-      <Command>copy /Y "$(SolutionDir)..\Libs\Metis-Core\Debug\*.*" "$(SolutionDir)x64\Debug\"</Command>
+      <Command>copy /Y "$(SolutionDir)..\Libs\Metis-Core\$(ConfigurationName)\*.*" "$(SolutionDir)..\$(ConfigurationName)\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -186,9 +187,10 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(SolutionDir)..\Libs\Metis-Core\$(Configuration)\METIS-Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(SolutionDir)..\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PreBuildEvent>
-      <Command>copy /Y "$(SolutionDir)..\Libs\Metis-Core\ReleaseCUDA\*.*" "$(SolutionDir)x64\ReleaseCUDA\"</Command>
+      <Command>copy /Y "$(SolutionDir)..\Libs\Metis-Core\$(ConfigurationName)\*.*" "$(SolutionDir)..\$(ConfigurationName)\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -154,7 +154,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>wxmsw32u_core.lib;wxbase32u.lib;$(ProjectDir)..\Libs\Metis-Core\Debug\METIS-Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OutDir);$(ProjectDir)..\Libs\wxWidgets\wxMSW-3.2.5_vc14x_x64_Dev\lib\vc14x_x64_dll;$(ProjectDir)..\Libs\wxWidgets\wxMSW-3.2.5_vc14x_x64_ReleaseDLL\lib\vc14x_x64_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <OutputFile>$(SolutionDir)..\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
+    <PreBuildEvent>
+      <Command>copy /Y "$(SolutionDir)..\Libs\Metis-Core\$(ConfigurationName)\*.*" "$(SolutionDir)..\$(ConfigurationName)\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -192,8 +196,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OutDir);$(ProjectDir)..\Libs\wxWidgets\wxMSW-3.2.5_vc14x_x64_Dev\lib\vc14x_x64_dll;$(ProjectDir)..\Libs\wxWidgets\wxMSW-3.2.5_vc14x_x64_ReleaseDLL\lib\vc14x_x64_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>wxmsw32u_core.lib;wxbase32u.lib;$(ProjectDir)..\Libs\Metis-Core\ReleaseCUDA\METIS-Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <OutputFile>$(SolutionDir)..\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
+    <PreBuildEvent>
+      <Command>copy /Y "$(SolutionDir)..\Libs\Metis-Core\$(ConfigurationName)\*.*" "$(SolutionDir)..\$(ConfigurationName)\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Kernel\UrbanEnviroment.cpp" />
