@@ -26,12 +26,13 @@ Unlike Python-based alternatives, **METIS-Core** is engineered for production-re
 
 ## 🛠️ Current Status & News
 
-*	 **Last Update:** August 24, 2026 **
-	 Current Development Roadmap:
-	 * **AlphaZero Integration:** Implementing self-play mechanisms to enable superhuman performance in zero-sum games. Paper: Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm por DeepMind
-	 	 Status: Near completion (example with Chess-AlphaGo Zero applicacion).
-	 Next:
-	 * **PPO (Proximal Policy Optimization):** Enabling support for **continuous action spaces**. This allows METIS-Core to output precise, multi-dimensional values, making it ideal for fields requiring fluid control and high-precision decision making.
+	* **Last Update:** August 24, 2026 **
+	Current Development Roadmap:
+	* **AlphaZero Integration:** Implementing self-play mechanisms to enable superhuman performance in zero-sum games. Paper: *Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm* by DeepMind.
+		* **Status:** Near completion (Chess-AlphaGo Zero example implementation).
+	Next:
+	* **PPO (Proximal Policy Optimization):** Enabling support for **continuous action spaces**. This allows METIS-Core to output precise, multi-dimensional values, making it ideal for fields requiring fluid control and high-precision decision making.
+
 
 *   🚀 **v0.2.0-alpha Released**: 
 	*   **Added Multi-head Architectures**: shared-backbone system to support coordination among AI agents to reach a shared goal
