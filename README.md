@@ -26,7 +26,7 @@ Unlike Python-based alternatives, **METIS-Core** is engineered for production-re
 
 ## 🛠️ Current Status & News
 
-	* **Last Update:** August 24, 2026 **
+*   **Last Update:** August 24, 2026 **
 	Current Development Roadmap:
 	* **AlphaZero Integration:** Implementing self-play mechanisms to enable superhuman performance in zero-sum games. Paper: *Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm* by DeepMind.
 		* **Status:** Near completion (Chess-AlphaGo Zero example implementation).
