@@ -39,8 +39,9 @@ Check out the ia chess learnign and in action! 🚀
 Metis-Core is completely environment-agnostic. You can easily integrate your own simulation by inheriting from our base classes and overriding the required methods to define your environment's state.
 The main class to implemented the AlphaGo Zero are:
 
-### template <typename TSTATE,typename TACTION> class IAlphaGoZeroState : public IAlphaGoZeroStateBase
-
+```cpp
+template <typename TSTATE,typename TACTION> class IAlphaGoZeroState : public IAlphaGoZeroStateBase
+```
 It is the class that we have to derivete our own class where we are going to implemented our own enviroment, in this case, the Board of the chess.
 ```cpp
 class Board : public Metis::IAlphaGoZeroState<TBOARD,TPIECEMOVEMENT>
@@ -155,7 +156,7 @@ void training(IAlphaGoZeroState<TSTATE,TACTION>* pEnv, IAgent* pAgent, IAgent* p
 ```
 It is a template method where should be call with a struct that represent the state of the enviroment, and the TACTION it is a struct that represent the action.
 
-note: TSTATE is not use at the end in the algorithm
+note: TSTATE is not use at the end in the algorithm (TODO: remove )
 TACTION in our example is:
 
 ```cpp
@@ -202,4 +203,19 @@ Injecting this material heuristic acts as a guide, helping the network learn muc
 
 However, if you do not call setMaterialHeuristicWeight, the engine will behave as a pure AlphaZero algorithm, relying entirely on the neural network's evaluations without any hardcoded human heuristics.
 
+### Call the alphazero Go to traning
 
+
+this is the code (in CView::StartTraningAZG)
+```cpp
+_pWhites->setID(0);
+_pBlacks->setID(1);
+
+// set up
+_AGZTrainer->setLoadModel((char*)"AlamosChess.ia");
+_AGZTrainer->setCallbackPerStep( (void *) this,callbackSearchMovement); // to debug the traning
+
+_AGZTrainer->setMaterialHeuristicWeight(0.3); // to help a little bit to MCTS
+
+_AGZTrainer->training<TBOARD,TPIECEMOVEMENT>(_pBoard, _pWhites, _pBlacks, bIsPresent_GPU); //traning with alphazero go
+```
