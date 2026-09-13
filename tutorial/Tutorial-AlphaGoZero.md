@@ -28,7 +28,7 @@ Why 'Alamos Chess' (6x6 board)? It is a reduced version of standard chess, but i
 
 Check out the ia chess learnign and in action! 🚀
 
-[![Watch the demo on YouTube](https://img.youtube.com/vi/Fswef8e0Okc/0.jpg)](https://www.youtube.com/watch?v=Fswef8e0Okc)
+[![Watch the demo on YouTube](https://img.youtube.com/vi/kfqHgOiUnMo/0.jpg)](https://www.youtube.com/watch?v=kfqHgOiUnMo)
 
 > **Note:** Best experienced with audio! The video features a custom soundtrack composed for the Metis-Core project.
 
