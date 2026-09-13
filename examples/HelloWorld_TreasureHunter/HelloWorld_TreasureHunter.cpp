@@ -47,13 +47,12 @@ void render(int agentPos, int treasurePos, int worldSize)
 	std::cout << "\r" << line << std::flush;
 }
 
-
 #pragma region IAAgent
 
 /// <summary>
 /// IA Agent to hunter the treasure
 /// </summary>
-class treasureHunter : public Metis::Agent
+class treasureHunter : public Metis::IAgent
 {
 
 public:

@@ -53,7 +53,7 @@ class SpaceEnviroment;
 /// TIE_1: Will defend the cargo ship at close range from the front
 /// TIE_2: Will defend the back
 /// </summary>
-class Spacecraft : public Metis::Agent
+class Spacecraft : public Metis::IAgent
 {
 public:
 	static const int DISTANCE_MIN_TO_SHUTTLE = 15;

@@ -11,7 +11,7 @@
 
 
 
-class Car :public Metis::Agent
+class Car :public Metis::IAgent
 {
 private:
 	int _id;
