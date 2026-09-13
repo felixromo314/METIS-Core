@@ -32,7 +32,7 @@ Check out the ia chess learnign and in action! 🚀
 
 > **Note:** Best experienced with audio! The video features a custom soundtrack composed for the Metis-Core project.
 
-- **Video Link:** [https://youtu.be/Fswef8e0Okc](https://youtu.be/Fswef8e0Okc)
+- **Video Link:** [https://www.youtube.com/watch?v=kfqHgOiUnMo)
 
 # Main Classes in Metis-Core
 
