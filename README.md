@@ -35,7 +35,7 @@ Unlike Python-based alternatives, **METIS-Core** is engineered for production-re
 *   🚀 **v0.3.0-alpha Released**: 
       * **AlphaZero Go:** AlphaZero Engine & Self-Play: Successfully integrated the AlphaZero self-play and MCTS loop using LibTorch. Validated on Los Alamos Chess (6x6) as a reference environment to balance tactical complexity with local hardware training efficiency. Paper: Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm by DeepMind.
 		
-	[![Watch the demo on YouTube](https://www.youtube.com/watch?v=kfqHgOiUnMo)
+	[![Watch the demo on YouTube](https://img.youtube.com/vi/kfqHgOiUnMo/0.jpg)](https://www.youtube.com/watch?v=kfqHgOiUnMo)
 	> **Note:** Best experienced with audio! The video features a custom soundtrack composed for the Metis-Core project.	
 
 *   🚀 **v0.2.0-alpha Released**: 
