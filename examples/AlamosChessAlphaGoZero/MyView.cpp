@@ -56,6 +56,10 @@ void DebugPrint(const char* format, ...)
 
 void callbackSearchMovement(void* pSender, Metis::TSEARCHACTION* pSearchAction)
 {
+    static std::mutex metricsMutex;
+
+    std::lock_guard<std::mutex> lock(metricsMutex);
+
     static FILE* metrics_fp = NULL;
     if (metrics_fp == NULL)
     {
@@ -165,6 +169,7 @@ void callbackSearchMovement(void* pSender, Metis::TSEARCHACTION* pSearchAction)
         MyView::_pSelf->countWhoWin[whoWinTmp]++;
 
         MyView::_pSelf->_winRateModel = pSearchAction->winRateModel;
+        fprintf(metrics_fp, "Thread ID:%d\n", pSearchAction->threadSelfplayID);
         fprintf(metrics_fp, "_minTotalLoss:%.3f   _minNumStepXEpisode:%d\n", MyView::_pSelf->_minTotalLoss, MyView::_pSelf->_minNumStepXEpisode);
         fprintf(metrics_fp, "       _countPlayerBlueWin:%d\n", MyView::_pSelf->_countPlayerBlueWin);
         fprintf(metrics_fp, "       _maxPlayerBlueWin:%d\n", MyView::_pSelf->_maxPlayerBlueWin);
@@ -766,7 +771,6 @@ void MyView::DisplayInRealTime(double bViewTraining)
     _realTime = bViewTraining;
 }
 
-
 void MyView::StartTraningAZG()
 {
     bool bIsPresent_GPU = Metis::isCUDAavailable();
@@ -781,7 +785,8 @@ void MyView::StartTraningAZG()
 
     _AGZTrainer->setMaterialHeuristicWeight(0.3); // to help a little bit to MCTS
 
-    _AGZTrainer->training<TBOARD,TPIECEMOVEMENT>(_pBoard, _pWhites, _pBlacks, bIsPresent_GPU); //traning with alphazero go
+    //_AGZTrainer->training<TBOARD,TPIECEMOVEMENT>(_pBoard, _pWhites, _pBlacks, bIsPresent_GPU); //traning with alphazero go one thread
+    _AGZTrainer->trainingMultiThread<TBOARD, TPIECEMOVEMENT>(_pBoard, _pWhites, _pBlacks, bIsPresent_GPU); //traning with alphazero go multi-thread
 
     delete _AGZTrainer;
 
