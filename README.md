@@ -30,7 +30,12 @@ Unlike Python-based alternatives, **METIS-Core** is engineered for production-re
 	Current Development Roadmap:
 	
 	Next:
+	* **AlphaZero Go** Asimetric:AlphaZero Go Asymmetric (MARL): Merging our Multi-Head neural networks with MCTS for complex Multi-Agent scenarios. Metis-Core will supports training entities with completely different action spaces and objectives (e.g., 1 Frigate (CWIS) vs 2 Kamikaze Drones).
+	
 	* **PPO (Proximal Policy Optimization):** Enabling support for **continuous action spaces**. This allows METIS-Core to output precise, multi-dimensional values, making it ideal for fields requiring fluid control and high-precision decision making.
+
+*   🚀 **v0.3.1-alpha Released**: 
+		* **AlphaZero Go:** Training in multi-threading the AlphaZero:
 
 *   🚀 **v0.3.0-alpha Released**: 
       * **AlphaZero Go:** AlphaZero Engine & Self-Play: Successfully integrated the AlphaZero self-play and MCTS loop using LibTorch. Validated on Los Alamos Chess (6x6) as a reference environment to balance tactical complexity with local hardware training efficiency. Paper: Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm by DeepMind.
