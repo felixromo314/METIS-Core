@@ -26,7 +26,7 @@ Unlike Python-based alternatives, **METIS-Core** is engineered for production-re
 
 ## 🛠️ Current Status & News
 
-*   **Last Update:** September 13, 2026 **
+*   **Last Update:**  18 September 2026 **
 	Current Development Roadmap:
 	
 	Next:
