@@ -30,7 +30,7 @@ Unlike Python-based alternatives, **METIS-Core** is engineered for production-re
 	Current Development Roadmap:
 	
 	Next:
-	* **AlphaZero Go** Asimetric:AlphaZero Go Asymmetric (MARL): Merging our Multi-Head neural networks with MCTS for complex Multi-Agent scenarios. Metis-Core will supports training entities with completely different action spaces and objectives (e.g., 1 Imperial Shuttle must use its rotating turret to defent its beskar cargo against two coordinating drones Kamikazes X-Wing. Asymmetric objectives: the Shuttle must survive, while the X-Wings must coordinate to destroy it.)
+	* **AlphaZero Go Asimetric** :AlphaZero Go Asymmetric (MARL): Merging our Multi-Head neural networks with MCTS for complex Multi-Agent scenarios. Metis-Core will supports training entities with completely different action spaces and objectives (e.g., 1 Imperial Shuttle must use its rotating turret to defent its beskar cargo against two coordinating drones Kamikazes X-Wing. Asymmetric objectives: the Shuttle must survive, while the X-Wings must coordinate to destroy it.)
 	
 	* **PPO (Proximal Policy Optimization):** Enabling support for **continuous action spaces**. This allows METIS-Core to output precise, multi-dimensional values, making it ideal for fields requiring fluid control and high-precision decision making.
 
