@@ -26,13 +26,15 @@ Unlike Python-based alternatives, **METIS-Core** is engineered for production-re
 
 ## 🛠️ Current Status & News
 
-*   **Last Update:**  18 September 2026 **
+*   **Last Update:**  14 October 2026 **
 	Current Development Roadmap:
 	
 	Next:
-	* **Asymmetric Multi-Agent AlphaZero** : Merging our Multi-Head neural networks with MCTS for complex Multi-Agent scenarios. Metis-Core will supports training entities with completely different action spaces and objectives (e.g., 1 Imperial Shuttle must use its rotating turret to defent its beskar cargo against two coordinating drones Kamikazes X-Wing. Asymmetric objectives: the Shuttle must survive, while the X-Wings must coordinate to destroy it.)
-	
 	* **PPO (Proximal Policy Optimization):** Enabling support for **continuous action spaces**. This allows METIS-Core to output precise, multi-dimensional values, making it ideal for fields requiring fluid control and high-precision decision making.
+		
+	
+*   🚀 **v0.4.0-alpha Released**: 
+		* **Asymmetric Multi-Head AlphaZero: Extended the AlphaZero engine to asymmetric two-team, zero-sum games. Each team can have a different number of players, its own observation space and its own action space. Each team is driven by its own multi-head network: one policy head per player on a shared backbone, plus one value head per team. Includes turn-based MCTS over continuous simulations, an optional material heuristic to speed up learning in long, sparse-reward games, and per-head training metrics. Validated on a real-time combat scenario, Kamikaze Drones vs Imperial Shuttle: two drones learn a coordinated pincer attack against a shuttle armed with a rotating laser turret. A play mode lets a human control the turret against the trained drones. A step-by-step usage guide is included for building your own asymmetric environment.
 
 *   🚀 **v0.3.1-alpha Released**: 
 		* **AlphaZero Go:** Training in multi-threading the AlphaZero:
