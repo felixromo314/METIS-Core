@@ -47,11 +47,11 @@ Why "Kamikaze Drone Swarm"? There are two teams, and each team must learn how to
 ### Demo: Kamikaze Drone Swarm
 Check out the Kamikaze Drone Swarm learning and in action! 🚀
 
-[![Watch the demo on YouTube](https://img.youtube.com/vi/kfqHgOiUnMo/0.jpg)](https://www.youtube.com/watch?v=kfqHgOiUnMo)
+[![Watch the demo on YouTube](https://img.youtube.com/vi/EaYJs4gUhTQ/0.jpg)](https://www.youtube.com/watch?v=EaYJs4gUhTQ)
 
 > **Note:** Best experienced with audio! The video features a custom soundtrack composed for the Metis-Core project.
 
-- **Video Link:** [https://www.youtube.com/watch?v=kfqHgOiUnMo) 
+- **Video Link:** [https://www.youtube.com/watch?v=EaYJs4gUhTQ) 
 
 # Main Classes in Metis-Core
 
