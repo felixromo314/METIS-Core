@@ -7,6 +7,7 @@
 #include "MyView.h"
 #include <assert.h>
 #include <numeric>
+#include <mutex>
 
 #include "Kernel/Board.h"
 #include "Kernel/Player.h"

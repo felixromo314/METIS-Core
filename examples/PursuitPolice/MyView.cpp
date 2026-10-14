@@ -373,9 +373,9 @@ void MyView::StartTraningInterceptionShip()
     
     Metis::AgentTrainerDQN agentTrainer;
 
+
     _doTranning = true;
     
-
     agentTrainer.setCallbackPerStep(onStepTraining);
     agentTrainer.setCallbackEndEpisode(onEndEpisode);
     

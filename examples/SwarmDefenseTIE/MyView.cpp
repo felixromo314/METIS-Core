@@ -229,8 +229,7 @@ MyView::MyView(wxFrame* parent)
     _X_Wing->GoHead();
     _X_Wing->_speedMaxSpeed = MAX_SPEED_X_WINGS;
     //_X_Wing->_speedMaxSpeed = 0; // for testing. set the X-Wing in a fixed position
-
-    
+        
 
     //_TIE_figther = new SpaceScortAgent();
 
@@ -760,7 +759,7 @@ void MyView::StopTraning()
 }
 void MyView::LoadTraning()
 {
-    _pMultiAgentHead->loadIAModel((char*)"imperialConvoy.ai"); // current path o full path name
+    _pMultiAgentHead->loadIAModel((char*)"imperialConvoy.ai", _IsPresent_GPU); // current path o full path name
 }
 void MyView::SaveIAModel()
 {

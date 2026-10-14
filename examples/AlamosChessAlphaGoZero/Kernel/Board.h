@@ -87,6 +87,9 @@ public:
 	virtual std::vector<float> getState();
 	virtual bool is_valid_action(int actionID);
 	virtual int  getRandomActionFromPlayer(int currentPlayer);
+
+	virtual double  getDeltaTime() { return 0.2; };  // Not use in this example
+	virtual bool isEqualState(IAlphaGoZeroStateBase* pOtherState) { return true; }; // not use in this example
 	//-------------------------------------------------------------------------------
 	
 };
