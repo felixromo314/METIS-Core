@@ -6,6 +6,18 @@ This guide shows how to train an agent with **Deep Q-Learning (DQN)** using **Me
 
 You do **not** need to implement any of the DQN machinery yourself: the Q-network, target network, replay buffer, ε-greedy exploration, loss and optimizer are all handled by Metis-Core. Your job is to describe **the world** and **the agent**.
 
+### Demo: DQN_Pong
+
+Check out the IA player in action! 🚀
+
+[![Watch the demo on YouTube](https://img.youtube.com/vi/iRe3HKzdlzA/0.jpg)](https://www.youtube.com/watch?v=iRe3HKzdlzA)
+
+> **Note:** Best experienced with audio! The video features a custom soundtrack composed for the Metis-Core project.
+
+- **Video Link:** [https://youtu.be/iRe3HKzdlzA](https://youtu.be/iRe3HKzdlzA)
+
+
+
 ---
 
 ## Table of contents
