@@ -6,18 +6,6 @@ This guide shows how to train an agent with **Deep Q-Learning (DQN)** using **Me
 
 You do **not** need to implement any of the DQN machinery yourself: the Q-network, target network, replay buffer, ε-greedy exploration, loss and optimizer are all handled by Metis-Core. Your job is to describe **the world** and **the agent**.
 
-### Demo: DQN_Pong
-
-Check out the IA player in action! 🚀
-
-[![Watch the demo on YouTube](https://img.youtube.com/vi/iRe3HKzdlzA/0.jpg)](https://www.youtube.com/watch?v=iRe3HKzdlzA)
-
-> **Note:** Best experienced with audio! The video features a custom soundtrack composed for the Metis-Core project.
-
-- **Video Link:** [https://youtu.be/iRe3HKzdlzA](https://youtu.be/iRe3HKzdlzA)
-
-
-
 ---
 
 ## Table of contents
@@ -38,6 +26,16 @@ Check out the IA player in action! 🚀
 
 ---
 
+### Demo: DQN_Pong
+
+Check out the IA player in action! 🚀
+
+[![Watch the demo on YouTube](https://img.youtube.com/vi/iRe3HKzdlzA/0.jpg)](https://www.youtube.com/watch?v=iRe3HKzdlzA)
+
+> **Note:** Best experienced with audio! The video features a custom soundtrack composed for the Metis-Core project.
+
+- **Video Link:** [https://youtu.be/iRe3HKzdlzA](https://youtu.be/iRe3HKzdlzA)
+---
 ## 1. Who is this guide for
 
 - **Programmers** who want to add a learning agent to a game or simulation without writing a DQN from scratch.
@@ -114,6 +112,18 @@ The left paddle (blue) is the agent. It learns to hit the ball against a procedu
 | `Kernel/PongEnviroment.h/.cpp` | **The environment**: derived from `Metis::Enviroment` |
 | `Kernel/Ball.h/.cpp` | Ball physics (plain C++, no Metis) |
 | `PongRender.h/.cpp` | Drawing with raylib (optional) |
+
+### Why raylib for the graphics?
+
+The graphics of `DQN_Pong` are made with **[raylib](https://www.raylib.com/)**, the C library for games and visual applications created by **Ramon Santamaria ([@raysan5](https://github.com/raysan5))**. It is a perfect match for a reinforcement learning example:
+
+- **Simple:** opening a window, drawing rectangles, circles and text, and reading the keyboard takes a handful of function calls. The whole Pong renderer is around 60 lines.
+- **No heavy dependencies:** plain C with a clean API, so it sits next to Metis-Core and LibTorch without adding complexity to the build.
+- **Fast iteration:** you can see what the agent is doing while it learns, which is the best way to debug a reward or an input.
+- **Easy to switch off:** all the drawing is isolated in `PongRender.cpp`; hiding it during training (SPACE) makes learning faster, and the learning code never depends on it.
+- **Permissive license (zlib):** you can reuse it freely in your own projects.
+
+Metis-Core does not depend on raylib: you can use any graphics library, or none at all. But if you want to *watch* your agent learn with minimal effort, raylib is an excellent choice.
 
 When you run it you get a menu:
 
