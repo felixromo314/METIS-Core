@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  External paths of the SARSwarm project. If you move folders, this is the only file to edit.
+  - METIS_DIR:          Metis-Core headers and .lib/.dll (the same ones used by SwarmDefenseTIE)
+  - METIS_RUNTIME_DIR:  folder with the LibTorch/CUDA DLLs that METIS-Core.dll needs at runtime
+                        (by default, the output of the MENTIS-Core_SRC solution where SwarmDefenseTIE already runs)
+  - RAYLIB_DIR:         raylib 5.5 (MSVC, x64) bundled in libs\raylib
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UserMacros">
+    <METIS_SRC_DIR>$(MSBuildThisFileDirectory)..\MENTIS-Core_SRC\</METIS_SRC_DIR>
+    <METIS_DIR>$(METIS_SRC_DIR)Examples\Libs\Metis-Core\</METIS_DIR>
+    <METIS_RUNTIME_DIR>$(METIS_SRC_DIR)x64\$(Configuration)\</METIS_RUNTIME_DIR>
+    <RAYLIB_DIR>$(MSBuildThisFileDirectory)libs\raylib\</RAYLIB_DIR>
+  </PropertyGroup>
+  <ItemGroup>
+    <BuildMacro Include="METIS_SRC_DIR"><Value>$(METIS_SRC_DIR)</Value></BuildMacro>
+    <BuildMacro Include="METIS_DIR"><Value>$(METIS_DIR)</Value></BuildMacro>
+    <BuildMacro Include="METIS_RUNTIME_DIR"><Value>$(METIS_RUNTIME_DIR)</Value></BuildMacro>
+    <BuildMacro Include="RAYLIB_DIR"><Value>$(RAYLIB_DIR)</Value></BuildMacro>
+  </ItemGroup>
+</Project>

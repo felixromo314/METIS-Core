@@ -1,0 +1,3 @@
+v2 W4000 H3000 S1800 V20.0 R150 P0.85 C1200 D600 CS0.20-0.60 CM2.00 T0.010 N100
+100 99.000 387.200 330.000 22.975 228.000 498.000 21.677 24.365
+# episodios exito% t_medio(s) t_mediana(s) redundancia% t_p25 t_p75 red_p25 red_p75

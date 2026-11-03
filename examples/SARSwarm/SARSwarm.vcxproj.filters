@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Simulation">
+      <UniqueIdentifier>{5E0B1C7A-3D2F-4C8E-9A61-0F7B2D4E1A01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{5E0B1C7A-3D2F-4C8E-9A61-0F7B2D4E1A02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{5E0B1C7A-3D2F-4C8E-9A61-0F7B2D4E1A03}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Castaway.cpp"><Filter>Simulation</Filter></ClCompile>
+    <ClCompile Include="src\Drone.cpp"><Filter>Simulation</Filter></ClCompile>
+    <ClCompile Include="src\SeaEnvironment.cpp"><Filter>Simulation</Filter></ClCompile>
+    <ClCompile Include="src\LawnmowerBaseline.cpp"><Filter>Simulation</Filter></ClCompile>
+    <ClCompile Include="src\Renderer.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="src\main.cpp"><Filter>App</Filter></ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Castaway.h"><Filter>Simulation</Filter></ClInclude>
+    <ClInclude Include="src\Drone.h"><Filter>Simulation</Filter></ClInclude>
+    <ClInclude Include="src\SeaEnvironment.h"><Filter>Simulation</Filter></ClInclude>
+    <ClInclude Include="src\SimConfig.h"><Filter>Simulation</Filter></ClInclude>
+    <ClInclude Include="src\LawnmowerBaseline.h"><Filter>Simulation</Filter></ClInclude>
+    <ClInclude Include="src\MetisInclude.h"><Filter>Simulation</Filter></ClInclude>
+    <ClInclude Include="src\Renderer.h"><Filter>Render</Filter></ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+    <None Include="assets\logo_metis_watermark.png" />
+  </ItemGroup>
+</Project>
