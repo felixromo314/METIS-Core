@@ -31,3 +31,5 @@ ReleaseCUDA/
 # Bloqueamos todos los zips pero permitimos los de la carpeta Dist
 *.zip
 !/Dist/*.zip
+*.mp4
+*.gitignore

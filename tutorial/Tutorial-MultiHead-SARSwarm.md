@@ -8,6 +8,16 @@ maps onto that API.
 > Audience: C++ programmers who know the basics of reinforcement learning (state, action, reward, episode).
 > You do not need to know LibTorch: Metis-Core hides it.
 
+### Demo: SARSwarm
+Check out the SARSwarm learning and in action! 🚀
+
+[![Watch the demo on YouTube](https://img.youtube.com/vi/EgTguBrTHbc/0.jpg)](https://www.youtube.com/watch?v=EgTguBrTHbc)
+
+> **Note:** Best experienced with audio! The video features a custom soundtrack composed for the Metis-Core project.
+
+- **Video Link:** [https://www.youtube.com/watch?v=EgTguBrTHbc) 
+
+
 ---
 
 ## Table of contents
