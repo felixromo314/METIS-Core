@@ -6,7 +6,6 @@
 
 While pure AlphaGo Zero relies entirely on self-play without domain knowledge, the Metis-Core framework allows for guided learning phases by incorporating a heuristic function. This is implemented via the float getMaterialHeuristicValue(int playerToEvaluateID) method, which provides tactical direction to each team during early training.
 
-![AlphaGo Zero Asymmeetric Multi-heads](img/imageAZGasimeetric800px.png)
 
 ### Demo: KamikazeDrone
 Check out the Kamikaze Drone Swarm learning and in action! 🚀
