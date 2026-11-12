@@ -8,6 +8,16 @@ While pure AlphaGo Zero relies entirely on self-play without domain knowledge, t
 
 ![AlphaGo Zero Asymmeetric Multi-heads](img/imageAZGasimeetric800px.png)
 
+### Demo: KamikazeDrone
+Check out the Kamikaze Drone Swarm learning and in action! 🚀
+
+[![Watch the demo on YouTube](https://img.youtube.com/vi/EaYJs4gUhTQ/0.jpg)](https://www.youtube.com/watch?v=EaYJs4gUhTQ)
+
+> **Note:** Best experienced with audio! The video features a custom soundtrack composed for the Metis-Core project.
+
+- **Video Link:** [https://www.youtube.com/watch?v=EaYJs4gUhTQ)
+
+
 ## Core Principles of the Learning Process
 
 * **Multi-Agent, Asymmetric Self-Play:** Instead of a single agent playing itself, two distinct teams (Team Blue and Team Red) compete in a shared environment. Each team is controlled by its own dedicated **Multi-Head Deep Neural Network**. Because the teams are asymmetric (e.g., two attacking drones vs. one defending shuttle), Team Blue's network and Team Red's network have completely different output architectures tailored to their specific agents' capabilities.
