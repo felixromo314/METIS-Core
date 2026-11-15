@@ -33,3 +33,5 @@ ReleaseCUDA/
 !/Dist/*.zip
 *.mp4
 *.gitignore
+*.ia
+*.ai
