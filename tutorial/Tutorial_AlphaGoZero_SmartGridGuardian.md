@@ -6,6 +6,8 @@
 
 This tutorial shows you how to build that game with METIS-Core's **asymmetric multi-head AlphaZero** engine, in pure C++ and without a single line of Python. By the end, you will know how to apply the same pattern to your own domain: cybersecurity, tactical simulation, logistics or strategy games.
 
+Source code: https://github.com/felixromo314/METIS-Core/tree/main/examples/SmartGridGuardian
+
 ### Demo: SmartGridGuardian
 Check out the SmartGridGuardian learning and in action! 🚀
 
