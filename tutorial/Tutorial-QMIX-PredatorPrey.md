@@ -20,6 +20,13 @@ You will learn:
 > This tutorial covers only the **public API** of METIS-Core (v0.5.x). Everything the framework
 > does internally (networks, mixing, replay, optimization) is handled for you.
 
+[![Watch the demo on YouTube](https://img.youtube.com/vi/ZlhwDe7iDt4/0.jpg)](https://www.youtube.com/watch?v=ZlhwDe7iDt4)
+
+> **Note:** Best experienced with audio! The video features a custom soundtrack composed for the Metis-Core project.
+
+- **Video Link:** [https://www.youtube.com/watch?v=ZlhwDe7iDt4)
+
+
 ### QMIX or multi-head?
 
 METIS-Core offers two ways to train cooperating agents. Pick the one that fits your problem:
