@@ -358,19 +358,17 @@ MyView::MyView(wxFrame* parent)
 
 
     //build the multi-agent blue team that will have 2 x-wing drones
-    _pTeamBlue = multiBuilderTeamBlue.addHead(std::string(NAME_XWINDRONE_1), _drone_XWing_1)
-        .addHead(std::string(NAME_XWINDRONE_2), _drone_XWing_2)
+    _pTeamBlue = multiBuilderTeamBlue.addHead(std::string(NAME_XWINDRONE_1), _drone_XWing_1, (int)TEAM_BLUE_ACTIONS::MAX_ACTIONS)
+        .addHead(std::string(NAME_XWINDRONE_2), _drone_XWing_2, (int)TEAM_BLUE_ACTIONS::MAX_ACTIONS)
         .addValueHead(std::string("valueHead"))
-        .setNumberInputsOutputs(TEAM_BLUE_INPUTS, (int)TEAM_BLUE_ACTIONS::MAX_ACTIONS)
         .useGPU(_IsPresent_GPU).build();
 
 
     _pTeamBlue->setID(TEAM_BLUE_ID);
 
     // Build the multi-agent red team, that only have 1 entity
-    _pTeamRed = multiBuilderTeamRed.addHead(std::string(NAME_SHUTTLE), _ImperialShuttle)
+    _pTeamRed = multiBuilderTeamRed.addHead(std::string(NAME_SHUTTLE), _ImperialShuttle, (int)TEAM_BLUE_ACTIONS::MAX_ACTIONS)
         .addValueHead(std::string("valueHead"))
-        .setNumberInputsOutputs(TEAM_RED_INPUTS, (int)TEAM_RED_ACTIONS::MAX_ACTIONS)
         .useGPU(_IsPresent_GPU)
         .build();
 
