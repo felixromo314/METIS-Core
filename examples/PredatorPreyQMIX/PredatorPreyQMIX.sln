@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37806.7 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PredatorPreyQMIX", "PredatorPreyQMIX.vcxproj", "{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+		ReleaseCUDA|x64 = ReleaseCUDA|x64
+		ReleaseCUDA|x86 = ReleaseCUDA|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}.Debug|x64.ActiveCfg = Debug|x64
+		{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}.Debug|x64.Build.0 = Debug|x64
+		{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}.Debug|x86.ActiveCfg = Debug|Win32
+		{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}.Debug|x86.Build.0 = Debug|Win32
+		{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}.Release|x64.ActiveCfg = Release|x64
+		{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}.Release|x64.Build.0 = Release|x64
+		{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}.Release|x86.ActiveCfg = Release|Win32
+		{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}.Release|x86.Build.0 = Release|Win32
+		{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}.ReleaseCUDA|x64.ActiveCfg = ReleaseCUDA|x64
+		{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}.ReleaseCUDA|x64.Build.0 = ReleaseCUDA|x64
+		{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}.ReleaseCUDA|x86.ActiveCfg = ReleaseCUDA|Win32
+		{3C2705A5-ACF8-4665-8B49-0E5AAA58BED0}.ReleaseCUDA|x86.Build.0 = ReleaseCUDA|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D55A6E83-8A17-481A-9EE4-85CC1684F6AB}
+	EndGlobalSection
+EndGlobal
